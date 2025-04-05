@@ -1,5 +1,5 @@
-import './styles.css';
-import { useCallback, useEffect, useRef, useState } from 'preact/hooks';
+import styles from './styles.module.scss';
+import { useCallback, useState } from 'preact/hooks';
 import { reconnectWS, sendMessageSocket, state } from '../../store/store';
 
 export const SettingsPage = () => {
@@ -24,7 +24,7 @@ export const SettingsPage = () => {
       sendMessageSocket({
         master: 'net',
         cmd: 'save',
-        mode: mode,
+        mode,
         ssid,
         password,
       });
@@ -38,20 +38,19 @@ export const SettingsPage = () => {
   }, []);
 
   return (
-    <div className="settings">
-      <div className="settings-panel">
-        <button className="btn" onClick={resetMaster}>
+    <div className={styles.settings}>
+      <div className={styles.settingsPanel}>
+        <button className={styles.btn} onClick={resetMaster}>
           Перезагрузка Мастера
         </button>
         <h2>Настройки Wi-Fi</h2>
-        <div className="panel">
+        <div className={styles.panel}>
           <label>
             Режим подключения:
             <select
-              id="wifi-mode"
               value={mode}
               onChange={e => {
-                return setMode((e.target as HTMLSelectElement).value as 'host' | 'ap');
+                setMode((e.target as HTMLSelectElement).value as 'host' | 'ap');
               }}
             >
               <option value="host">host</option>
@@ -80,44 +79,37 @@ export const SettingsPage = () => {
               onInput={e => setPassword((e.target as HTMLInputElement).value)}
             />
           </label>
-          <button className="btn" onClick={saveSettingsWifi}>
+          <button className={styles.btn} onClick={saveSettingsWifi}>
             Сохранить настройки Wi-Fi
           </button>
           <label style={{ marginTop: '20px' }}>
             URL WebSocket-сервера:
-            <div className="ws-url-wrapper">
+            <div className={styles.wsUrlWrapper}>
               <input
                 type="text"
                 value={reUrl}
                 onInput={e => {
-                  const input = (e.target as HTMLInputElement).value;
-                  // const masked = input.replace(/[^\d.]/g, '');
-                  setReUrl(input);
+                  setReUrl((e.target as HTMLInputElement).value);
                 }}
               />
-              <button className={'btn'} onClick={reConnectWS}>
+              <button className={styles.btn} onClick={reConnectWS}>
                 Переподключить сокет
               </button>
             </div>
           </label>
         </div>
+
         <h2>Сканирование сетей Wi-Fi</h2>
-        <button className="btn" onClick={scanWifiNet}>
+        <button className={styles.btn} onClick={scanWifiNet}>
           Сканировать сети
         </button>
-        <div className="wifi-networks" id="wifi-networks">
-          {state.value.wifiNetworks.map(item => {
-            return (
-              <div
-                className={'wifi-tag'}
-                onClick={() => {
-                  setSsid(item);
-                }}
-              >
-                {item}
-              </div>
-            );
-          })}
+
+        <div className={styles.wifiNetworks}>
+          {state.value.wifiNetworks.map(item => (
+            <div className={styles.wifiTag} onClick={() => setSsid(item)}>
+              {item}
+            </div>
+          ))}
         </div>
       </div>
     </div>
