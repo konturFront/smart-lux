@@ -72,19 +72,19 @@
 
 /* Адаптивность */
 @media (max-width: 1024px) {
-    .driver-item {
+    .driverItem {
         flex: 1 1 clamp(150px, 33%, 250px);
     }
 }
 
 @media (max-width: 768px) {
-    .driver-item {
+    .driverItem {
         flex: 1 1 clamp(160px, 50%, 300px);
     }
 }
 
 @media (max-width: 480px) {
-    .driver-item {
+    .driverItem {
         flex: 1 1 100%;
     }
 }
