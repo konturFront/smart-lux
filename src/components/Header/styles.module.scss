@@ -1,0 +1,77 @@
+.header {
+    padding: 0 30px;
+    gap: 20px;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background: #333;
+    transition: all 0.3s ease;
+    z-index: 99;
+}
+
+.burgerBtn {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+}
+
+.burgerBtnItem {
+    height: 3px;
+    width: 100%;
+    background: #ffffff;
+}
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.connected .icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #2ecc71;
+    background-color: #2ecc71;
+    color: #2ecc71;
+}
+
+.pending .icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #f4c005;
+    background-color:  #f4c005;
+    color: #f4c005;
+}
+
+
+.disconnected .icon {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #e74c3c;
+    background-color: #e74c3c;
+    color: #e74c3c;
+}
+
+.text--connected {
+    color: #2ecc71;
+}
+
+.text--pending {
+    color: #f4c005;
+}
+
+.text--disconnected {
+    color: #e74c3c;
+}

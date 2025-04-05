@@ -1,0 +1,244 @@
+.deviceCardWrapper{
+  max-width: 800px;
+}
+
+.deviceCard {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.backButton {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: none;
+  border-radius: 50%;
+  background-color: #d0d0d0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.backButton:hover {
+  background-color: #e0e0e0;
+}
+
+.backButton:active {
+  transform: scale(0.8);
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sliderWrapper {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.sliderLabel {
+  font-size: 20px;
+  flex: 1 1 50%;
+  min-width: 100px;
+}
+
+.sliderItem {
+  position: relative;
+  flex: 1 1 50%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sliderItem input[type="range"] {
+  flex: 1;
+  height: 10px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: #333; /* трек — чёрный */
+  border-radius: 5px;
+  outline: none;
+}
+
+/* WebKit (Chrome, Safari) */
+.sliderItem input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  background: #aaaaaa; /* белый ползунок */
+  border-radius: 50%;
+  border: none;
+  margin-top: 0px; /* выравнивание по центру */
+  cursor: pointer;
+}
+
+/* Firefox */
+.sliderItem input[type="range"]::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  background: white; /* белый ползунок */
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.sliderItem input[type="range"]::-moz-range-track {
+  height: 10px;
+  background: black; /* трек — чёрный */
+  border-radius: 5px;
+}
+
+.sliderValue {
+  position: absolute;
+  left: -20px;
+  transform: translateX(-50%);
+  background: #444;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.fadeControls  {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.groupSelect p {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.groups label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 6px;
+  background-color: #e0e0e0;
+  font-size: 16px;
+  padding: 10px 16px;
+  cursor: pointer;
+  user-select: none;
+  min-width: 130px;
+  justify-content: flex-start;
+}
+
+@keyframes blink {
+  0% {
+    background-color: #feff96; // ярко-жёлтый — сразу вспыхивает
+  }
+  30% {
+    background-color: #f0f07e; // немного темнее — затухание начинается
+  }
+  100% {
+    background-color: #333; // медленно уходит в чёрный
+  }
+}
+
+.blinking {
+  animation: blink 1s ease-out infinite;
+}
+
+.groups label:hover {
+  background-color: #d6d6d6;
+}
+
+.testSection {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  max-width: 300px;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  flex: 1;
+  min-width: 120px;
+}
+
+.button:hover {
+  background-color: #444;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.button:active {
+  background-color: #222;
+  transform: scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .sliderWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+
+  .sliderItem {
+    width: 100%;
+  }
+
+  .sliderValue {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    margin-bottom: 5px;
+  }
+
+  .testSection {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .panel input[type="text"],
+  .panel select {
+    width: 100%;
+  }
+
+  .groupSelect .groups {
+    //flex-direction: column;
+  }
+}

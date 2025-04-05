@@ -1,0 +1,45 @@
+.drawer {
+    z-index: 100;
+    top: 70px;
+    left: 0;
+    position: fixed;
+    display: flex;
+    background-color: #333;
+    width: 300px;
+    height: 100%;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 0.1s ease, transform 0.1s ease;
+    pointer-events: none;
+}
+
+.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+.menu >div {
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.activeLink {
+    background: rgba(255, 255, 255, 0.1);
+}
