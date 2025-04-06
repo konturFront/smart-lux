@@ -19,9 +19,9 @@ export function Header() {
             };
           }}
         >
-          <div className={styles.burgerBtnItem}></div>
-          <div className={styles.burgerBtnItem}></div>
-          <div className={styles.burgerBtnItem}></div>
+          <div className={styles.burgerBtnItem} />
+          <div className={styles.burgerBtnItem} />
+          <div className={styles.burgerBtnItem} />
         </div>
 
         <div
@@ -29,7 +29,7 @@ export function Header() {
           className={`${styles.status} ${styles[socketStatus]}`}
           style={{ display: 'flex', height: '100%' }}
         >
-          <span className={styles.icon}></span>
+          <span className={styles.icon} />
           <span className={`${styles.text} ${styles[`text--${socketStatus}`]}`} id="id-text-span">
             {socketStatus === socketStatusEnum.CONNECTED && 'Подключено'}
             {socketStatus === socketStatusEnum.PENDING && 'Подключение'}

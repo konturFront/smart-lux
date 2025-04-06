@@ -10,4 +10,8 @@ export default defineConfig({
     minify: 'esbuild',
     assetsInlineLimit: Infinity,
   },
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+  },
 });
