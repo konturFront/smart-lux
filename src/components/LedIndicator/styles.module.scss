@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #2e2e2e;
+  padding: 6px 10px;
+  color: #fffacd;
+  width: 44px;
+  font-family: sans-serif;
+}
+
+.label {
+  position: absolute;
+  font-size: 10px;
+  top: -5px;
+  left: 10px;
+  font-weight: bold;
+  color: #fffacd;
+  margin-bottom: 4px;
+}
+
+.triangle {
+  width: 30px;
+  height: 12px;
+  background-color: #fffacd;
+  clip-path: polygon(0% 100%, 100% 100%, 100% 0%);
+}

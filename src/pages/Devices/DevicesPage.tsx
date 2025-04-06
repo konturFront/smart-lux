@@ -2,13 +2,14 @@ import styles from './styles.module.scss';
 import { useCallback } from 'preact/hooks';
 import { sendMessageSocket, state } from '../../store/store';
 import { useLocation } from 'preact-iso';
+import { DriverPreview } from '../../components/DriverPreview/DriverPreview';
 
 export function DevicesPage() {
   const { route } = useLocation();
   const updateDrivers = useCallback(() => {
     sendMessageSocket({ driver: 'update', cmd: 'start' });
   }, []);
-
+  console.log('state.value.updatedDevices', state.value.updatedDevices);
   return (
     <div className={styles.devices}>
       <div className={styles.wrapperBtn}>
@@ -21,20 +22,13 @@ export function DevicesPage() {
       </div>
       <div id="drivers-list" className={styles.driversList}>
         {Object.keys(state.value.updatedDevices).map(key => (
-          <div
-            key={state.value.updatedDevices?.[key][0]}
-            className={styles.driverItem}
-            onClick={() => {
-              route(`/service/devices/${state.value.updatedDevices?.[key][0]}`);
-            }}
-          >
-            <div>
-              <strong>Адрес:</strong> {state.value.updatedDevices?.[key][0]}
-            </div>
-            <div>
-              <strong>Тип:</strong> {state.value.updatedDevices?.[key][1]}
-            </div>
-          </div>
+          <DriverPreview
+            key={state.value.updatedDevices[key][0]}
+            name={'Тестовое имя драйвера'}
+            type={state.value.updatedDevices[key][1]}
+            channelNumber={state.value.updatedDevices[key][0]}
+            onClick={() => route(`/service/devices/${state.value.updatedDevices[key][0]}`)}
+          />
         ))}
       </div>
     </div>

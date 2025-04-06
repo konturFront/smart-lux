@@ -1,11 +1,9 @@
 /* Контейнер со списком драйверов */
 .driversList {
-    max-width: 700px;
     display: flex;
     flex-wrap: wrap;
+    gap: 16px;
     margin-top: 20px;
-    gap: 10px;
-    justify-content: flex-start;
 }
 
 /* Один элемент-драйвер */
@@ -104,3 +102,4 @@
         max-width: 1000px;
     }
 }
+
