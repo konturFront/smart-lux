@@ -6,8 +6,8 @@ import { ServicePage } from './pages/Service/ServicePage';
 import { Layout } from './components/Layout/Layout';
 import { _404 } from './pages/_404';
 import { SettingsPage } from './pages/Settings/SettingsPage';
-import { DevicesPage } from './pages/Devices/DevicesPage';
 import { DeviceCardPage } from './pages/DeviceCard/DeviceCardPage';
+import { DevicesPage } from './pages/Devices/DevicesPage';
 
 export function App() {
   return (

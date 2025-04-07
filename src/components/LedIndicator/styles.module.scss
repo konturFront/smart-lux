@@ -4,8 +4,8 @@
   flex-direction: column;
   justify-content: center;
   background-color: #2e2e2e;
-  padding: 6px 10px;
-  color: #fffacd;
+  //padding: 6px 10px;
+  color: #fef7cb;
   width: 44px;
   font-family: sans-serif;
 }
@@ -14,15 +14,16 @@
   position: absolute;
   font-size: 10px;
   top: -5px;
-  left: 10px;
+  left: 0;
   font-weight: bold;
-  color: #fffacd;
+  color: #fef7cb;
   margin-bottom: 4px;
 }
 
 .triangle {
-  width: 30px;
-  height: 12px;
-  background-color: #fffacd;
+  display: flex;
+  width: 40px;
+  height: 16px;
+  background-color: #fef7cb;
   clip-path: polygon(0% 100%, 100% 100%, 100% 0%);
 }

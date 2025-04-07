@@ -305,16 +305,16 @@ export function DeviceCardPage() {
           </div>
         </div>
         <div className={styles.buttons}>
-          <button className="btn" onClick={pullDriverSettings}>
+          <button className={styles.button} onClick={pullDriverSettings}>
             Обновить
           </button>
           <button
-            className={`btn ${isTestingDriver ? styles.blinking : ''}`}
+            className={`${styles.button} ${isTestingDriver ? styles.blinking : ''}`}
             onClick={testingDriver}
           >
             Тест драйвера
           </button>
-          <button className="btn" onClick={saveBtnSettings}>
+          <button className={styles.button} onClick={saveBtnSettings}>
             Сохранить
           </button>
         </div>

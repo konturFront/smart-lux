@@ -1,35 +1,38 @@
 .container {
   cursor: pointer;
   display: flex;
-  align-content: stretch;
   align-items: center;
   background-color: #2e2e2e;
-
   border-radius: 4px;
-  gap: 8px;
+  gap: 2px;
   font-family: sans-serif;
-
   min-width: 300px;
   width: 100%;
+  align-self: flex-start; // не тянемся по высоте родителя
+  height:60px;     // сбрасываем возможное наследование
+  max-height: unset;
 
-  @media (min-width: 900px) {
+  @media (min-width: 990px) {
     width: calc(33.333% - 12px);
+    padding: 9px 6px;
   }
 
-  @media (max-width: 899px) and (min-width: 600px) {
+  @media (max-width: 990px) and (min-width: 600px) {
     width: calc(50% - 12px);
+    padding: 9px 6px;
   }
 
-  @media (max-width: 650px) {
-    padding: 9px 14px;
+  @media (max-width: 675px) {
+    padding: 9px 6px;
     min-width: unset;
   }
 }
 
 .channelNumber {
-  padding: 12px 10px;
+  padding-left:2px ;
+  font-weight: bold;
   color: white;
-  font-size: 16px;
+  font-size: 22px;
   width: 27px;
   overflow: hidden;
   //text-align: left;
@@ -37,15 +40,17 @@
 }
 
 .indicators {
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 54px;
+  width: 50px;
+  overflow: hidden;
 }
 
 .dot {
-  width: clamp(16px, 3vw, 19px);
-  height: clamp(16px, 3vw, 19px);
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   position: relative;
@@ -64,6 +69,7 @@
 
 .name {
   white-space: nowrap;
+  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   color: white;
@@ -114,9 +120,10 @@
 }
 
 .warm {
-  background-color: #ffcc00;
+  background-color: #ecd67b;
 }
 
 .cold {
-  background-color: #00ccff;
+  background-color: #cbe9fd;
 }
+

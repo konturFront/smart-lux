@@ -1,9 +1,11 @@
-.wrapper-btn {
+.service{
+    padding: 20px 20px 0 20px;
+}
+.wrapperBtn {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
 }
-
 .btn {
     background-color: #333;
     color: #fff;

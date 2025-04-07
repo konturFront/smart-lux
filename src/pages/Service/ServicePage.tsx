@@ -1,14 +1,14 @@
-import './styles.css';
+import styles from './styles.module.scss';
 import { useLocation } from 'preact-iso';
 
 export function ServicePage() {
   const location = useLocation();
 
   return (
-    <div className="service">
-      <div className="wrapper-btn">
+    <div className={styles.service}>
+      <div className={styles.wrapperBtn}>
         <button
-          className="btn"
+          className={styles.btn}
           id="service-btn-rooms"
           onClick={() => {
             // location.route('/service/devices')
@@ -17,7 +17,7 @@ export function ServicePage() {
           Настройка помещений
         </button>
         <button
-          className="btn"
+          className={styles.btn}
           id="service-btn-devices"
           onClick={() => {
             location.route('/service/devices');

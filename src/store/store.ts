@@ -30,6 +30,7 @@ export const state = signal<AppState>({
   socketStatus: socketStatusEnum.DISCONNECTED,
   wifiNetworks: [],
   settingsDriver: [],
+  // updatedDevices: { d1: [1, 2], d2: [4, 5] },
   updatedDevices: {},
   groups: Array(16).fill(false),
 });

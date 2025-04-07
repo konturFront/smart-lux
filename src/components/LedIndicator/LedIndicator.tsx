@@ -1,10 +1,14 @@
 import { h } from 'preact';
 import styles from './styles.module.scss';
 
-export function LedIndicator() {
+type IProps = {
+  led?: boolean;
+};
+
+export function LedIndicator({ led }: IProps) {
   return (
     <div className={styles.container}>
-      <span className={styles.label}>LED</span>
+      {led && <span className={styles.label}>LED</span>}
       <div className={styles.triangle} />
     </div>
   );
