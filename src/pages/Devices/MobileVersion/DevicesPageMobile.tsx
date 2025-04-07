@@ -68,7 +68,7 @@ export function DevicesPageMobile() {
             key={state.value.updatedDevices[key][0]}
             name={'Контейнер Контейнер'}
             type={state.value.updatedDevices[key][1]}
-            channelNumber={state.value.updatedDevices[key][0]}
+            address={state.value.updatedDevices[key][0]}
             onClick={() => route(`/service/devices/${state.value.updatedDevices[key][0]}`)}
           />
         ))}

@@ -30,8 +30,8 @@ export const state = signal<AppState>({
   socketStatus: socketStatusEnum.DISCONNECTED,
   wifiNetworks: [],
   settingsDriver: [],
-  // updatedDevices: { d1: [1, 2], d2: [4, 5] },
   updatedDevices: {},
+
   groups: Array(16).fill(false),
 });
 export const stateUI = signal<IStateUI>({ isActiveMenu: false, isLoadingUI: false });
@@ -54,10 +54,6 @@ export const hiddenLoadingStateUI = () => {
 export const setGroups = (groups: boolean[]) => {
   state.value = { ...state.value, groups };
 };
-
-// export const setDeviceSettings = (settings: number[]) => {
-//   state.value = { ...state.value, deviceSettings: settings };
-// };
 
 export const setWifiNetworks = (networks: string[]) => {
   state.value = { ...state.value, wifiNetworks: networks };

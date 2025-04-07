@@ -1,4 +1,5 @@
 import { __DEV__ } from '../../global/value';
+import { SocketService__Mock } from './socketService__Mock';
 
 type MessageHandler = (data: any) => void;
 type StatusHandler = (status: 'pending' | 'connected' | 'disconnected' | 'error') => void;
@@ -152,4 +153,4 @@ class SocketService {
   }
 }
 
-export const socketService = new SocketService();
+export const socketService = __DEV__ ? new SocketService__Mock() : new SocketService();
