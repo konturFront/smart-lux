@@ -3,6 +3,7 @@ import { sendMessageSocket, state } from '../../../store/store';
 import { useLocation } from 'preact-iso';
 import { DriverPreview } from '../../../components/DriverPreview/DriverPreview';
 import stylesMobile from './stylesMobile.module.scss';
+import { Modal } from '../../../components/Modal/Modal';
 
 export function RoomsPageMobile() {
   const refTest = useRef<HTMLDivElement>(null);
@@ -14,6 +15,9 @@ export function RoomsPageMobile() {
   const [activeIndex, setActiveIndex] = useState(0); // Начинаем с "Коридор"
   const containerRef = useRef<HTMLDivElement>(null);
   const driversSelectRoom = state.value?.rooms?.[activeIndex]?.drivers;
+  const [isOpenModal, setOpenModal] = useState(false);
+  const [isAddRoomModal, setIsAddRoomModal] = useState(false);
+  const selectRoom = state.value?.rooms?.[activeIndex];
 
   useEffect(() => {
     sendMessageSocket({ rooms: 'search', cmd: 'start' }, false);
@@ -79,20 +83,24 @@ export function RoomsPageMobile() {
     setActiveIndex(prev => Math.min(prev + 1, state.value.rooms.length - 1));
   }, [state.value.rooms]);
 
-  const handleUpdateDrivers = useCallback(() => {
-    sendMessageSocket({ driver: 'update', cmd: 'start' });
+  const handleDeleteRoom = useCallback(() => {
+    setOpenModal(true);
   }, []);
-
-  // Вычисляем, сколько драйверов влезает по высоте
 
   return (
     <div className={stylesMobile.devices}>
       <div className={stylesMobile.wrapperBtn}>
-        <button className={stylesMobile.btn} id="device-btn-search">
-          Поиск устройств
+        <button className={stylesMobile.btn} id="device-btn-search" onClick={handleDeleteRoom}>
+          Удалить
         </button>
-        <button className={stylesMobile.btn} id="device-btn-update" onClick={handleUpdateDrivers}>
-          Обновить
+        <button
+          className={stylesMobile.btn}
+          id="device-btn-update"
+          onClick={() => {
+            setIsAddRoomModal(true);
+          }}
+        >
+          Добавить
         </button>
       </div>
       <div className={stylesMobile.roomCarouselWrapper}>
@@ -187,6 +195,75 @@ export function RoomsPageMobile() {
           )}
         </div>
       </div>
+      <Modal open={isOpenModal} onClose={() => setOpenModal(false)} maxWidth="md">
+        <div style={{ padding: '12px' }}>
+          <button onClick={() => setOpenModal(false)}>Закрыть</button>
+          <h2 style={{ color: 'white' }}>
+            {`Вы точно хотите удалить помещение:`}
+            <br />
+            <span style={{ fontWeight: 'bold', textDecoration: 'underline' }}>
+              {selectRoom?.roomName}
+            </span>
+          </h2>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+              gap: '10px',
+            }}
+          >
+            <div
+              className={stylesMobile.buttonCancel}
+              style={{ textAlign: 'center' }}
+              onClick={() => setOpenModal(false)}
+            >
+              Отмена
+            </div>
+            <div className={stylesMobile.buttonConfirm} style={{ textAlign: 'center' }}>
+              Да
+            </div>
+          </div>
+        </div>
+      </Modal>
+      {/*///ДОБАВИТЬ помещение*/}
+      <Modal open={isAddRoomModal} onClose={() => setIsAddRoomModal(false)} maxWidth="md">
+        <div style={{ padding: '12px' }}>
+          <button onClick={() => setIsAddRoomModal(false)}>Закрыть</button>
+          <h2 style={{ color: 'white' }}>{`Добавить помещение:`}</h2>
+          <label>
+            Название помещения:
+            <input
+              autoComplete="off"
+              type="text"
+              id="wifi-password"
+              // value={password}
+              // onInput={e => setPassword((e.target as HTMLInputElement).value)}
+            />
+          </label>
+
+          <div
+            style={{
+              display: 'flex',
+              marginTop: '30px',
+              justifyContent: 'center',
+              flexWrap: 'wrap',
+              gap: '10px',
+            }}
+          >
+            <div
+              className={stylesMobile.buttonCancel}
+              style={{ textAlign: 'center' }}
+              onClick={() => setIsAddRoomModal(false)}
+            >
+              Отмена
+            </div>
+            <div className={stylesMobile.buttonConfirm} style={{ textAlign: 'center' }}>
+              Да
+            </div>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
