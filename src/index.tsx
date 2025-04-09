@@ -8,6 +8,7 @@ import { _404 } from './pages/_404';
 import { SettingsPage } from './pages/Settings/SettingsPage';
 import { DeviceCardPage } from './pages/DeviceCard/DeviceCardPage';
 import { DevicesPage } from './pages/Devices/DevicesPage';
+import { RoomsPage } from './pages/Rooms/RoomsPage';
 
 export function App() {
   return (
@@ -18,6 +19,7 @@ export function App() {
           <Route path="/service" component={ServicePage} />
           <Route path="/service/devices" component={DevicesPage} />
           <Route path="/service/devices/:id" component={DeviceCardPage} />
+          <Route path="/service/rooms" component={RoomsPage} />
           <Route path="/settings" component={SettingsPage} />
           <Route default component={_404} />
         </Router>

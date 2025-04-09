@@ -26,7 +26,6 @@ export function DriverPreview({
   name = 'Комната спальная 12345678901234567890',
   onClick,
 }: Props) {
-  console.log('address', address);
   const colors = lampColorsMap[`${type}`];
   return (
     <div className={styles.container} onClick={onClick}>

@@ -1,4 +1,3 @@
-import { useLocation } from 'preact-iso';
 import { Drawer } from '../Drawer/Drawer';
 import styles from './styles.module.scss';
 import { socketStatusEnum, state, stateUI } from '../../store/store';

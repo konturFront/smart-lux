@@ -11,7 +11,7 @@ export function ServicePage() {
           className={styles.btn}
           id="service-btn-rooms"
           onClick={() => {
-            // location.route('/service/devices')
+            location.route('/service/rooms');
           }}
         >
           Настройка помещений

@@ -8,6 +8,8 @@ export enum socketStatusEnum {
   DISCONNECTED = 'disconnected',
   ERROR = 'error',
 }
+export type Room = { idRoom: string; roomName: string; drivers: Record<string, string[]> };
+export type RoomsArr = Room[];
 
 // Тип для состояния устройства
 export interface AppState {
@@ -17,6 +19,7 @@ export interface AppState {
   groups: boolean[];
   updatedDevices: Record<string, string[]>;
   settingsDriver: number[];
+  rooms: RoomsArr | [];
 }
 
 export interface IStateUI {
@@ -31,7 +34,7 @@ export const state = signal<AppState>({
   wifiNetworks: [],
   settingsDriver: [],
   updatedDevices: {},
-
+  rooms: [],
   groups: Array(16).fill(false),
 });
 export const stateUI = signal<IStateUI>({ isActiveMenu: false, isLoadingUI: false });
@@ -61,6 +64,10 @@ export const setWifiNetworks = (networks: string[]) => {
 
 export const setConnectionStatus = (status: socketStatusEnum) => {
   state.value = { ...state.value, socketStatus: status };
+};
+// Получение списка комнат с драйверами для страницы rooms
+export const setRooms = (rooms: RoomsArr) => {
+  state.value = { ...state.value, rooms: rooms };
 };
 
 // Пример инициализации сокета с подпиской
@@ -99,6 +106,11 @@ socketService.onMessage(data => {
   // Ответное сообщение после сканирования сетей Wi-Fi (server->client):
   if (data.master === 'scan' && data.cmd === 'stop' && Array.isArray(data.ssid)) {
     setWifiNetworks(data.ssid);
+    hiddenLoadingStateUI();
+  }
+  // Ответное сообщение после запроса на получение комнат с драйверами
+  if (data.rooms === 'search' && data.cmd === 'download') {
+    setRooms(data.roomsArr);
     hiddenLoadingStateUI();
   }
 });
