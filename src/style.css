@@ -191,8 +191,5 @@ template,
   box-sizing: border-box;
 }
 
-header {
-  display: flex;
-  justify-content: flex-start;
-  background-color: #673ab8;
-}
+
+
