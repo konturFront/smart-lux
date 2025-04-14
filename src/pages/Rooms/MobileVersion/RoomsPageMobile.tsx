@@ -100,7 +100,7 @@ export function RoomsPageMobile() {
             setIsAddRoomModal(true);
           }}
         >
-          Добавить
+          Создать
         </button>
       </div>
       <div className={stylesMobile.roomCarouselWrapper}>
@@ -196,71 +196,54 @@ export function RoomsPageMobile() {
         </div>
       </div>
       <Modal open={isOpenModal} onClose={() => setOpenModal(false)} maxWidth="md">
-        <div style={{ padding: '12px' }}>
-          <button onClick={() => setOpenModal(false)}>Закрыть</button>
-          <h2 style={{ color: 'white' }}>
-            {`Вы точно хотите удалить помещение:`}
+        <div className={stylesMobile.modalContainer}>
+          {/* Кнопка-крестик */}
+          <button className={stylesMobile.closeBtn} onClick={() => setOpenModal(false)}>
+            &times;
+          </button>
+
+          <h2 className={stylesMobile.title}>
+            Вы точно хотите удалить помещение:
             <br />
-            <span style={{ fontWeight: 'bold', textDecoration: 'underline' }}>
-              {selectRoom?.roomName}
-            </span>
+            <span className={stylesMobile.roomName}>{selectRoom?.roomName}</span>
           </h2>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              gap: '10px',
-            }}
-          >
-            <div
-              className={stylesMobile.buttonCancel}
-              style={{ textAlign: 'center' }}
-              onClick={() => setOpenModal(false)}
-            >
+
+          {/* Кнопки внизу */}
+          <div className={stylesMobile.actions}>
+            <div className={stylesMobile.buttonCancel} onClick={() => setOpenModal(false)}>
               Отмена
             </div>
-            <div className={stylesMobile.buttonConfirm} style={{ textAlign: 'center' }}>
-              Да
-            </div>
+            <div className={stylesMobile.buttonConfirm}>Да</div>
           </div>
         </div>
       </Modal>
       {/*///ДОБАВИТЬ помещение*/}
       <Modal open={isAddRoomModal} onClose={() => setIsAddRoomModal(false)} maxWidth="md">
-        <div style={{ padding: '12px' }}>
-          <button onClick={() => setIsAddRoomModal(false)}>Закрыть</button>
-          <h2 style={{ color: 'white' }}>{`Добавить помещение:`}</h2>
-          <label>
-            Название помещения:
+        <div className={stylesMobile.modalContainer}>
+          {/* Кнопка-крестик для закрытия */}
+          <button className={stylesMobile.closeBtn} onClick={() => setIsAddRoomModal(false)}>
+            &times;
+          </button>
+
+          <h2 className={stylesMobile.title}>Добавить помещение</h2>
+
+          <label className={stylesMobile.field}>
+            <span className={stylesMobile.fieldLabel}>Название помещения:</span>
             <input
               autoComplete="off"
               type="text"
-              id="wifi-password"
-              // value={password}
-              // onInput={e => setPassword((e.target as HTMLInputElement).value)}
+              className={stylesMobile.input}
+              id="room-name"
+              // value={roomName}
+              // onInput={e => setRoomName(e.target.value)}
             />
           </label>
 
-          <div
-            style={{
-              display: 'flex',
-              marginTop: '30px',
-              justifyContent: 'center',
-              flexWrap: 'wrap',
-              gap: '10px',
-            }}
-          >
-            <div
-              className={stylesMobile.buttonCancel}
-              style={{ textAlign: 'center' }}
-              onClick={() => setIsAddRoomModal(false)}
-            >
+          <div className={stylesMobile.actions}>
+            <button className={stylesMobile.buttonCancel} onClick={() => setIsAddRoomModal(false)}>
               Отмена
-            </div>
-            <div className={stylesMobile.buttonConfirm} style={{ textAlign: 'center' }}>
-              Да
-            </div>
+            </button>
+            <button className={stylesMobile.buttonConfirm}>Да</button>
           </div>
         </div>
       </Modal>

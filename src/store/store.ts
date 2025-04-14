@@ -8,7 +8,16 @@ export enum socketStatusEnum {
   DISCONNECTED = 'disconnected',
   ERROR = 'error',
 }
-export type Room = { idRoom: string; roomName: string; drivers: Record<string, string[]> };
+export type Room = {
+  idRoom: string;
+  roomName: string;
+  drivers: Record<string, number[]>;
+  groups?: {
+    idGroup: string;
+    groupName: string;
+    driverAddresses: Record<string, number[]>;
+  }[];
+};
 export type RoomsArr = Room[];
 
 // Тип для состояния устройства
@@ -52,10 +61,6 @@ export const showLoadingStateUI = () => {
 // Метод для скрытия лоадинг в шапке
 export const hiddenLoadingStateUI = () => {
   stateUI.value = { ...stateUI.value, isLoadingUI: false };
-};
-
-export const setGroups = (groups: boolean[]) => {
-  state.value = { ...state.value, groups };
 };
 
 export const setWifiNetworks = (networks: string[]) => {
@@ -110,6 +115,7 @@ socketService.onMessage(data => {
   }
   // Ответное сообщение после запроса на получение комнат с драйверами
   if (data.rooms === 'search' && data.cmd === 'download') {
+    console.log('data.roomsArr', data.roomsArr);
     setRooms(data.roomsArr);
     hiddenLoadingStateUI();
   }

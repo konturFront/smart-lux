@@ -1,5 +1,6 @@
 .container {
   cursor: pointer;
+  position: relative;
   display: flex;
   align-items: center;
   background-color: #2e2e2e;
@@ -11,6 +12,10 @@
   align-self: flex-start; // не тянемся по высоте родителя
   height:60px;     // сбрасываем возможное наследование
   max-height: unset;
+  user-select: none;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -ms-user-select: none;       /* IE 10+ */
 
   @media (min-width: 990px) {
     width: calc(33.333% - 12px);
@@ -26,6 +31,48 @@
     padding: 9px 6px;
     min-width: unset;
   }
+}
+
+//@keyframes wobble {
+//  0% {
+//    transform: rotate(0deg);
+//  }
+//  15% {
+//    transform: rotate(-1.5deg);
+//  }
+//  30% {
+//    transform: rotate(1.5deg);
+//  }
+//  45% {
+//    transform: rotate(-1.5deg);
+//  }
+//
+//  60% {
+//    transform: rotate(1.5deg);
+//  }
+//
+//  100% {
+//    transform: rotate(0deg);
+//  }
+//}
+//
+//.shake {
+//  animation: wobble 1s ease-in-out infinite;
+//  transform-origin: center bottom; // Качаем как на петле снизу
+//}
+
+@keyframes blink {
+  0%, 100% {
+    background-color: #2e2e2e; /* исходный фон */
+  }
+  50% {
+    background-color: #92fd85; /* промежуточный (зелёный) */
+  }
+}
+
+/* Класс, который включает мигание */
+.blink {
+  animation: blink 1s ease-in-out infinite;
 }
 
 .channelNumber {

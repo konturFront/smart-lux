@@ -13,6 +13,10 @@
     background: #333;
     transition: all 0.3s ease;
     z-index: 99;
+
+    @media (max-width: 600px) {
+        padding: 0 10px;
+    }
 }
 
 .burgerBtn {
@@ -23,7 +27,7 @@
     width: 30px;
     height: 20px;
     margin-right: 10px;
-}
+ }
 
 .burgerBtnItem {
     height: 3px;
@@ -78,3 +82,12 @@
 .text--disconnected {
     color: #e74c3c;
 }
+
+.title {
+    margin-left: 10px; font-size: 20px; color: white;
+    //@media (max-width: 400px) {
+    //    font-size: 18px;
+    //}
+}
+
+

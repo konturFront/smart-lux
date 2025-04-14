@@ -103,54 +103,56 @@ export function RoomsPageDesktop() {
           ))}
       </div>
       <Modal open={isOpenModal} onClose={() => setOpenModal(false)} maxWidth="md">
-        <div className={styles.modalContainer}>
-          {/* Кнопка-крестик для закрытия */}
-          <button className={styles.closeBtn} onClick={() => setOpenModal(false)}>
-            &times;
-          </button>
-
-          <h2 className={styles.title}>
-            Вы точно хотите удалить помещение:
+        <div style={{ padding: '16px' }}>
+          <button onClick={() => setOpenModal(false)}>Закрыть</button>
+          <h2 style={{ color: 'white' }}>
+            {`Вы точно хотите удалить помещение:`}
             <br />
-            <span className={styles.roomName}>{selectRoom?.roomName}</span>
+            <span style={{ fontWeight: 'bold', textDecoration: 'underline' }}>
+              {selectRoom?.roomName}
+            </span>
           </h2>
-
-          <div className={styles.actions}>
-            {/* Уже существующие стили: buttonCancel, buttonConfirm */}
-            <div className={styles.buttonCancel} onClick={() => setOpenModal(false)}>
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <div
+              className={styles.buttonCancel}
+              style={{ textAlign: 'center' }}
+              onClick={() => setOpenModal(false)}
+            >
               Отмена
             </div>
-            <div className={styles.buttonConfirm}>Да</div>
+            <div className={styles.buttonConfirm} style={{ textAlign: 'center' }}>
+              Да
+            </div>
           </div>
         </div>
       </Modal>
       {/*///ДОБАВИТЬ помещение*/}
       <Modal open={isAddRoomModal} onClose={() => setIsAddRoomModal(false)} maxWidth="md">
-        <div className={styles.modalContainer}>
-          {/* Кнопка-крестик для закрытия */}
-          <button className={styles.closeBtn} onClick={() => setIsAddRoomModal(false)}>
-            &times;
-          </button>
-
-          <h2 className={styles.title}>Добавить помещение</h2>
-
-          <label className={styles.field}>
-            <span className={styles.fieldLabel}>Название помещения:</span>
+        <div style={{ padding: '16px' }}>
+          <button onClick={() => setIsAddRoomModal(false)}>Закрыть</button>
+          <h2 style={{ color: 'white' }}>{`Добавить помещение:`}</h2>
+          <label>
+            Название помещения:
             <input
               autoComplete="off"
               type="text"
-              className={styles.input}
-              id="room-name"
-              // value={roomName}
-              // onInput={e => setRoomName(e.target.value)}
+              id="wifi-password"
+              // value={password}
+              // onInput={e => setPassword((e.target as HTMLInputElement).value)}
             />
           </label>
 
-          <div className={styles.actions}>
-            <button className={styles.buttonCancel} onClick={() => setIsAddRoomModal(false)}>
+          <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '30px' }}>
+            <div
+              className={styles.buttonCancel}
+              style={{ textAlign: 'center' }}
+              onClick={() => setIsAddRoomModal(false)}
+            >
               Отмена
-            </button>
-            <button className={styles.buttonConfirm}>Да</button>
+            </div>
+            <div className={styles.buttonConfirm} style={{ textAlign: 'center' }}>
+              Да
+            </div>
           </div>
         </div>
       </Modal>

@@ -1,0 +1,23 @@
+{
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "plugins": [
+    "react-hooks"
+  ],
+  "settings": {
+    "react": {
+      "pragma": "h",
+      "fragment": "Fragment",
+      "version": "999.999.999"
+    }
+  },
+  "rules": {
+
+  }
+}
