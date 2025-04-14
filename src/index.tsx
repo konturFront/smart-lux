@@ -7,7 +7,7 @@ import { _404 } from './pages/_404';
 import { SettingsPage } from './pages/Settings/SettingsPage';
 import { DeviceCardPage } from './pages/DeviceCard/DeviceCardPage';
 import { DevicesPage } from './pages/Devices/DevicesPage';
-import { RoomsPage } from './pages/Rooms/RoomsPage';
+import { RoomsAndGroupsPage } from './pages/Rooms/RoomsAndGroupsPage';
 import { SensorsPage } from './pages/Sensors/SensorsPage';
 import { Home } from './pages/Home/Home';
 import { LongPressButton } from './pages/TestPage/TestPage';
@@ -21,7 +21,7 @@ export function App() {
           <Route path="/service" component={ServicePage} />
           <Route path="/service/devices" component={DevicesPage} />
           <Route path="/service/devices/:id" component={DeviceCardPage} />
-          <Route path="/service/rooms" component={RoomsPage} />
+          <Route path="/service/roomsgroups" component={RoomsAndGroupsPage} />
           <Route path="/service/sensors" component={SensorsPage} />
           <Route path="/settings" component={SettingsPage} />
           <Route path="/test" component={LongPressButton} />

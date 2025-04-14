@@ -1,12 +1,12 @@
 import { useDeviceDetect } from '../../hooks/useDeviceDetect';
-import { RoomsPageMobile } from './MobileVersion/RoomsPageMobile';
+import { RoomsAndGroupsPageMobile } from './MobileVersion/RoomsAndGroupsPageMobile';
 import { RoomsPageDesktop } from './DesktopVersion/RoomsPageDesktop';
 
-export const RoomsPage = () => {
+export const RoomsAndGroupsPage = () => {
   const { isMobile } = useDeviceDetect();
 
   if (isMobile) {
-    return <RoomsPageMobile />;
+    return <RoomsAndGroupsPageMobile />;
   }
   return <RoomsPageDesktop />;
 };
