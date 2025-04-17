@@ -101,7 +101,27 @@ export class SocketService__Mock {
                   driverAddresses: { d0: [18, 7], d1: [19, 4], d2: [20, 4] },
                 },
                 {
-                  idGroup: 'gLivingWall',
+                  idGroup: 'gLivingWall1',
+                  groupName: 'Уход',
+                  driverAddresses: { d3: [21, 6], d4: [22, 4], d5: [23, 8] },
+                },
+                {
+                  idGroup: 'gLivingWall2',
+                  groupName: 'Встреча гостей',
+                  driverAddresses: { d3: [21, 6], d4: [22, 4], d5: [23, 8] },
+                },
+                {
+                  idGroup: 'gLivingWall3',
+                  groupName: 'Романтика',
+                  driverAddresses: { d3: [21, 6], d4: [22, 4], d5: [23, 8] },
+                },
+                {
+                  idGroup: 'gLivingWall4',
+                  groupName: 'Свет везде',
+                  driverAddresses: { d3: [21, 6], d4: [22, 4], d5: [23, 8] },
+                },
+                {
+                  idGroup: 'gLivingWall5',
                   groupName: 'Подсветка по периметру',
                   driverAddresses: { d3: [21, 6], d4: [22, 4], d5: [23, 8] },
                 },

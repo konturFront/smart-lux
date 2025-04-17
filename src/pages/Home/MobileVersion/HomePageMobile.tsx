@@ -4,7 +4,7 @@ import { useLocation } from 'preact-iso';
 import { DriverPreview } from '../../../components/DriverPreview/DriverPreview';
 import stylesMobile from './stylesMobile.module.scss';
 import { Modal } from '../../../components/Modal/Modal';
-import { useCalculateItemsPerPage } from '../hooks/useCalculateItemsPerPage';
+import { useCalculateItemsPerPage } from '../../../hooks/useCalculateItemsPerPage';
 
 export function HomePageMobile() {
   const refTest = useRef<HTMLDivElement>(null);
@@ -106,17 +106,6 @@ export function HomePageMobile() {
 
   return (
     <div className={stylesMobile.devices}>
-      {/*<div className={stylesMobile.wrapperBtn}>*/}
-      {/*  <button*/}
-      {/*    className={stylesMobile.btn}*/}
-      {/*    id="device-btn-update"*/}
-      {/*    onClick={() => {*/}
-      {/*      setIsAddRoomModal(true);*/}
-      {/*    }}*/}
-      {/*  >*/}
-      {/*    Создать*/}
-      {/*  </button>*/}
-      {/*</div>*/}
       <div className={stylesMobile.roomCarouselWrapper}>
         <div
           style={{

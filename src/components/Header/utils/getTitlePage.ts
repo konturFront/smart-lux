@@ -12,7 +12,7 @@ export const getTitle = (pathname: string) => {
 
   // Страница «Помещения»
   if (pathname === '/service/rooms') return 'Настройка помещений';
-  if (pathname === '/service/roomsgroups') return 'Настройка групп и помещений';
+  if (pathname.startsWith('/service/rooms/')) return 'Настройка групп';
   if (pathname === '/settings') return 'Настройка Wi-Fi';
 
   // Если ничего не подошло

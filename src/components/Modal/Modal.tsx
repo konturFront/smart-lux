@@ -9,6 +9,15 @@ interface ModalProps {
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   fullWidth?: boolean;
   fullScreen?: boolean;
+  // Новые пропсы для управления кнопками
+  buttonsType?: 'none' | 'single' | 'dual'; // 'none' - без кнопок, 'single' - одна, 'dual' - две
+  singleButtonText?: string;
+  singleButtonAction?: () => void;
+  dualPrimaryButtonText?: string;
+  dualPrimaryButtonAction?: () => void;
+  dualSecondaryButtonText?: string;
+  dualSecondaryButtonAction?: () => void;
+  showCloseButton?: boolean; // Показывать ли кнопку закрытия
 }
 
 const widthMap = {
@@ -26,6 +35,14 @@ export function Modal({
   maxWidth = 'sm',
   fullWidth = false,
   fullScreen = false,
+  buttonsType = 'none',
+  singleButtonText = 'Понятно',
+  singleButtonAction,
+  dualPrimaryButtonText = 'Да',
+  dualPrimaryButtonAction,
+  dualSecondaryButtonText = 'Нет',
+  dualSecondaryButtonAction,
+  showCloseButton = true,
 }: ModalProps) {
   // Закрытие по Esc
   useEffect(() => {
@@ -38,6 +55,10 @@ export function Modal({
 
   if (!open) return null;
 
+  const handleSingleButtonClick = () => {
+    singleButtonAction ? singleButtonAction() : onClose();
+  };
+
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div
@@ -47,7 +68,41 @@ export function Modal({
         }}
         onClick={e => e.stopPropagation()}
       >
-        {children}
+        <div className={styles.modalContainer}>
+          {showCloseButton && (
+            <button className={styles.closeBtn} onClick={onClose}>
+              &times;
+            </button>
+          )}
+          {children}
+
+          {buttonsType !== 'none' && (
+            <div className={styles.actions}>
+              {buttonsType === 'dual' && (
+                <>
+                  <button
+                    className={styles.buttonCancel}
+                    onClick={dualSecondaryButtonAction || onClose}
+                  >
+                    {dualSecondaryButtonText}
+                  </button>
+                  <button className={styles.buttonConfirm} onClick={dualPrimaryButtonAction}>
+                    {dualPrimaryButtonText}
+                  </button>
+                </>
+              )}
+              {buttonsType === 'single' && (
+                <button
+                  className={styles.buttonConfirm}
+                  onClick={handleSingleButtonClick}
+                  style={{ width: '100%' }}
+                >
+                  {singleButtonText}
+                </button>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

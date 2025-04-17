@@ -1,9 +1,9 @@
 import { Drawer } from '../Drawer/Drawer';
 import styles from './styles.module.scss';
-import { socketStatusEnum, state, stateUI } from '../../store/store';
+import { state, stateUI } from '../../store/store';
 import { Loader } from '../Loader/Loader';
 import { WifiIcon } from '../Wifi/Wifi';
-import { useLocation, useRoute } from 'preact-iso';
+import { useLocation } from 'preact-iso';
 import { getTitle } from './utils/getTitlePage';
 
 export function Header() {
@@ -28,7 +28,7 @@ export function Header() {
             <div className={styles.burgerBtnItem} />
             <div className={styles.burgerBtnItem} />
           </div>
-          <div style={styles.title}>{currentTitle}</div>
+          <div className={styles.title}>{currentTitle}</div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <div style={{ textAlign: 'center' }}>

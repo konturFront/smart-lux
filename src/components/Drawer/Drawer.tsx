@@ -48,8 +48,8 @@ export const Drawer = () => {
           {'Настройка сенсоров'}
         </div>
         <div
-          className={url === '/service/roomsgroups' ? styles.activeLink : ''}
-          onClick={() => handlerChangeRoute('/service/roomsgroups')}
+          className={url === '/service/rooms' ? styles.activeLink : ''}
+          onClick={() => handlerChangeRoute('/service/rooms')}
         >
           {'Настройка групп и помещений'}
         </div>

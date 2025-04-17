@@ -115,7 +115,6 @@ socketService.onMessage(data => {
   }
   // Ответное сообщение после запроса на получение комнат с драйверами
   if (data.rooms === 'search' && data.cmd === 'download') {
-    console.log('data.roomsArr', data.roomsArr);
     setRooms(data.roomsArr);
     hiddenLoadingStateUI();
   }
