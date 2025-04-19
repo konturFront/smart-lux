@@ -3,6 +3,7 @@ import { useLocation, useRoute } from 'preact-iso';
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks';
 import { groupsToMasks, parseGroupMasks } from '../../utils/parseGroupMask';
 import { sendMessageSocket, showLoadingStateUI, state } from '../../store/store';
+import { Button } from '../../components/Button/Button';
 
 export function DeviceCardPage() {
   const { params } = useRoute();
@@ -305,9 +306,7 @@ export function DeviceCardPage() {
           </div>
         </div>
         <div className={styles.buttons}>
-          <button className={styles.button} onClick={pullDriverSettings}>
-            Обновить
-          </button>
+          <Button text={'Обновить'} onClick={pullDriverSettings} />
           <button
             className={`${styles.button} ${isTestingDriver ? styles.blinking : ''}`}
             onClick={testingDriver}

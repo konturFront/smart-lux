@@ -26,12 +26,12 @@
     justify-content: space-between;
     width: 30px;
     height: 20px;
-    margin-right: 10px;
+
  }
 
 .burgerBtnItem {
     height: 3px;
-    width: 100%;
+    width: 30px;
     background: #ffffff;
 }
 
@@ -83,7 +83,8 @@
 }
 
 .title {
-    margin-left: 10px; font-size: 22px; color: white;
+   font-size: 22px; color: white;
+    line-height: 22px;
   @media (max-width: 380px) {
      font-size: 20px;
   }

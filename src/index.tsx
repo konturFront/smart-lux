@@ -11,7 +11,6 @@ import { RoomsPage } from './pages/Rooms/RoomsPage';
 import { SensorsPage } from './pages/Sensors/SensorsPage';
 import { Home } from './pages/Home/Home';
 import { LongPressButton } from './pages/TestPage/TestPage';
-import { GroupsPage } from './pages/Groups/Groups';
 
 export function App() {
   return (

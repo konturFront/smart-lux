@@ -14,7 +14,15 @@ export function Header() {
   return (
     <>
       <div className={styles.header}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            flex: '1 1 auto',
+            justifyContent: 'flex-start',
+            gap: '10px',
+          }}
+        >
           <div
             className={styles.burgerBtn}
             onClick={() => {
@@ -32,7 +40,7 @@ export function Header() {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <div style={{ textAlign: 'center' }}>
-            <WifiIcon size={40} level4={false} level3={false} />
+            <WifiIcon size={40} rate={2} />
           </div>
           <div
             id="socket-indicator"
@@ -44,7 +52,7 @@ export function Header() {
                 &nbsp;{state.value.socketURL}
               </span>
             </span>
-            {stateUI.value.isLoadingUI && <Loader />}
+            {/*{stateUI.value.isLoadingUI && <Loader />}*/}
           </div>
         </div>
       </div>

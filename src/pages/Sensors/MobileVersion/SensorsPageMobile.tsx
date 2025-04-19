@@ -3,6 +3,7 @@ import { sendMessageSocket, state } from '../../../store/store';
 import { useLocation } from 'preact-iso';
 import { DriverPreview } from '../../../components/DriverPreview/DriverPreview';
 import stylesMobile from './stylesMobile.module.scss';
+import { Button } from '../../../components/Button/Button';
 
 export function SensorsPageMobile() {
   const refTest = useRef<HTMLDivElement>(null);
@@ -54,12 +55,8 @@ export function SensorsPageMobile() {
   return (
     <div className={stylesMobile.devices}>
       <div className={stylesMobile.wrapperBtn}>
-        <button className={stylesMobile.btn} id="device-btn-search">
-          Поиск устройств
-        </button>
-        <button className={stylesMobile.btn} id="device-btn-update" onClick={handleUpdateDrivers}>
-          Обновить
-        </button>
+        <Button text="Поиск устройств" onClick={handleUpdateDrivers} />
+        <Button text="Обновить" onClick={handleUpdateDrivers} />
       </div>
 
       <div id="drivers-list" className={stylesMobile.driversList} ref={refTest}>
@@ -75,23 +72,34 @@ export function SensorsPageMobile() {
       </div>
       {/*ПАГИНАЦИЯ*/}
       <div className={stylesMobile.paginationBar}>
-        <div className={stylesMobile.navigation}>
-          <div
-            style={{ marginRight: '5px', visibility: page === 1 ? 'hidden' : 'visible' }}
-            className={stylesMobile.arrow}
-            onClick={() => setPage(p => Math.max(p - 1, 1))}
-          >
-            &laquo;
-          </div>
-          <div className={stylesMobile.totalCount}>{totalDrivers}</div>
-          <div
-            style={{ marginLeft: '5px', visibility: page === countPages ? 'hidden' : 'visible' }}
-            className={stylesMobile.arrow}
-            onClick={() => setPage(p => Math.min(p + 1, countPages))}
-          >
-            &raquo;
-          </div>
+        <div
+          style={{
+            marginRight: '5px',
+            visibility: page === 1 ? 'hidden' : 'visible',
+            fontSize: '38px',
+            left: '0',
+            top: '0',
+          }}
+          className={stylesMobile.arrowPagination}
+          onClick={() => setPage(p => Math.max(p - 1, 1))}
+        >
+          &laquo;
         </div>
+        <div
+          style={{
+            marginLeft: '5px',
+            visibility: page === countPages ? 'hidden' : 'visible',
+            fontSize: '38px',
+            right: '0',
+            top: '0',
+          }}
+          className={stylesMobile.arrowPagination}
+          onClick={() => setPage(p => Math.min(p + 1, countPages))}
+        >
+          &raquo;
+        </div>
+
+        <div className={stylesMobile.totalCount}>{totalDrivers}</div>
         <div className={stylesMobile.dotsWrapper}>
           {countPages > 0 && (
             <div className={stylesMobile.dots}>

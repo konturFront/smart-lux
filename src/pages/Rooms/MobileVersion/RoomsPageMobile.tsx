@@ -5,6 +5,9 @@ import styles from './stylesMobile.module.scss';
 import { Modal } from '../../../components/Modal/Modal';
 import { useCalculateItemsPerPage } from '../../../hooks/useCalculateItemsPerPage';
 import { GroupPreview } from '../../../components/GroupPreview/GroupPreview';
+import { Button } from '../../../components/Button/Button';
+import { RoomCarousel } from '../../../components/Carousel/Carousel';
+import stylesMobile from '../../Home/MobileVersion/stylesMobile.module.scss';
 
 export const RoomsPageMobile = () => {
   const refTest = useRef<HTMLDivElement>(null);
@@ -88,73 +91,36 @@ export const RoomsPageMobile = () => {
   return (
     <div className={styles.devices}>
       <div className={styles.wrapperBtn}>
-        <div
-          className={styles.btn}
-          id="device-btn-update"
+        <Button
+          text="Удалить"
           onClick={() => {
             setIsDeleteRoomModal(true);
           }}
-        >
-          {`Удалить`}
-        </div>
-        <div
-          className={styles.btn}
-          id="device-btn-update"
+        />
+        <Button
+          text="Cоздать"
           onClick={() => {
             setIsAddRoomModal(true);
           }}
-        >
-          {`Создать`}
-        </div>
+        />
       </div>
-      <div className={styles.roomCarouselWrapper}>
-        <div
-          style={{
-            fontSize: '38px',
-            visibility: activeIndex === 0 - 1 ? 'hidden' : 'visible',
-          }}
-          className={styles.arrowPagination}
-          onClick={handlePrev}
-        >
-          &laquo;
-        </div>
-        <div className={styles.roomCarousel} ref={containerRef}>
-          {state.value?.rooms?.map((room, index) => (
-            <div
-              key={room.idRoom + index}
-              className={`${styles.roomItem} ${index === activeIndex ? styles.active : ''}`}
-              onClick={() => {
-                setActiveIndex(index);
-              }}
-            >
-              {room.roomName}
-            </div>
-          ))}
-        </div>
-        <div
-          style={{
-            fontSize: '38px',
-            visibility: activeIndex === state.value.rooms.length - 1 ? 'hidden' : 'visible',
-          }}
-          className={styles.arrowPagination}
-          onClick={handleNext}
-        >
-          &raquo;
-        </div>
-      </div>
+      <RoomCarousel
+        rooms={state.value?.rooms || []}
+        activeIndex={activeIndex}
+        onItemClick={setActiveIndex}
+        onPrev={handlePrev}
+        onNext={handleNext}
+      />
       <div
         className={styles.wrapperBtn}
         style={{ justifyContent: 'flex-end', marginBottom: '20px' }}
       >
-        <div
-          className={styles.btn}
-          id="device-btn-update"
+        <Button
+          text="Создать группу"
           onClick={() => {
             setIsAddGroupModal(true);
           }}
-        >
-          {`Создать группу`}
-        </div>
+        />
       </div>
       <div id="drivers-list" className={styles.driversList} ref={refTest}>
         {currentItems.map((item, index) => {
@@ -177,39 +143,42 @@ export const RoomsPageMobile = () => {
         })}
       </div>
       {/*ПАГИНАЦИЯ*/}
-      <div className={styles.paginationBar}>
-        <div className={styles.navigation}>
-          <div
-            style={{
-              marginRight: '5px',
-              visibility: page === 1 ? 'hidden' : 'visible',
-              fontSize: '38px',
-            }}
-            className={styles.arrowPagination}
-            onClick={() => setPage(p => Math.max(p - 1, 1))}
-          >
-            &laquo;
-          </div>
-          <div className={styles.totalCount}>{countElementForPages}</div>
-          <div
-            style={{
-              marginLeft: '5px',
-              visibility: page === countPages ? 'hidden' : 'visible',
-              fontSize: '38px',
-            }}
-            className={styles.arrowPagination}
-            onClick={() => setPage(p => Math.min(p + 1, countPages))}
-          >
-            &raquo;
-          </div>
+      <div className={stylesMobile.paginationBar}>
+        <div
+          style={{
+            marginRight: '5px',
+            visibility: page === 1 ? 'hidden' : 'visible',
+            fontSize: '38px',
+            left: '0',
+            top: '0',
+          }}
+          className={stylesMobile.arrowPagination}
+          onClick={() => setPage(p => Math.max(p - 1, 1))}
+        >
+          &laquo;
         </div>
-        <div className={styles.dotsWrapper}>
+        <div
+          style={{
+            marginLeft: '5px',
+            visibility: page === countPages ? 'hidden' : 'visible',
+            fontSize: '38px',
+            right: '0',
+            top: '0',
+          }}
+          className={stylesMobile.arrowPagination}
+          onClick={() => setPage(p => Math.min(p + 1, countPages))}
+        >
+          &raquo;
+        </div>
+
+        <div className={stylesMobile.totalCount}>{countElementForPages}</div>
+        <div className={stylesMobile.dotsWrapper}>
           {countPages > 0 && (
-            <div className={styles.dots}>
+            <div className={stylesMobile.dots}>
               {Array.from({ length: countPages }).map((_, index) => (
                 <span
                   key={index}
-                  className={`${styles.dot} ${page === index + 1 ? styles.active : ''}`}
+                  className={`${stylesMobile.dot} ${page === index + 1 ? stylesMobile.active : ''}`}
                   onClick={() => setPage(index + 1)}
                 />
               ))}
@@ -217,6 +186,7 @@ export const RoomsPageMobile = () => {
           )}
         </div>
       </div>
+
       <Modal
         maxWidth="md"
         open={isAddGroupModal || isDeleteRoomModal || isAddRoomModal || !!isEditGroupModal}
@@ -229,18 +199,16 @@ export const RoomsPageMobile = () => {
           setRenameValue(undefined);
         }}
         buttonsType="dual"
-        dualPrimaryButtonText={`${isDeleteRoomModal ? 'Удалить' : isAddGroupModal || isAddRoomModal ? 'Cоздать' : !!isEditGroupModal ? 'Переименовать' : 'Удалить'}`}
+        dualPrimaryButtonText={`${isDeleteRoomModal ? 'Удалить' : isAddGroupModal || isAddRoomModal ? 'Cоздать' : !!isEditGroupModal ? 'Редактировать' : 'Удалить'}`}
         dualPrimaryButtonAction={() => {}}
         dualSecondaryButtonText={`${isDeleteRoomModal || isAddRoomModal || isAddGroupModal ? 'Отмена' : !!isEditGroupModal ? 'Удалить' : 'Error'}`}
       >
         {isDeleteRoomModal && (
           <>
-            <div className={styles.title}>{`Вы точно хотите удалить помещение`}</div>
-            <label className={styles.field}>
-              <div
-                style={{ textAlign: 'center', fontSize: '20px' }}
-              >{`${selectRoom.roomName}`}</div>
-            </label>
+            <div
+              className={styles.title}
+            >{`Вы точно хотите удалить помещение "${selectRoom.roomName}"`}</div>
+            <label className={styles.field}></label>
           </>
         )}
         {!!isEditGroupModal && (

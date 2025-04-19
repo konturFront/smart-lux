@@ -5,6 +5,7 @@ import { DriverPreview } from '../../../components/DriverPreview/DriverPreview';
 import stylesMobile from './stylesMobile.module.scss';
 import { Modal } from '../../../components/Modal/Modal';
 import { useCalculateItemsPerPage } from '../../../hooks/useCalculateItemsPerPage';
+import { RoomCarousel } from '../../../components/Carousel/Carousel';
 
 export function HomePageMobile() {
   const refTest = useRef<HTMLDivElement>(null);
@@ -106,41 +107,13 @@ export function HomePageMobile() {
 
   return (
     <div className={stylesMobile.devices}>
-      <div className={stylesMobile.roomCarouselWrapper}>
-        <div
-          style={{
-            fontSize: '38px',
-            visibility: activeIndex === 0 - 1 ? 'hidden' : 'visible',
-          }}
-          className={stylesMobile.arrowPagination}
-          onClick={handlePrev}
-        >
-          &laquo;
-        </div>
-        <div className={stylesMobile.roomCarousel} ref={containerRef}>
-          {state.value?.rooms?.map((room, index) => (
-            <div
-              key={room.idRoom + index}
-              className={`${stylesMobile.roomItem} ${index === activeIndex ? stylesMobile.active : ''}`}
-              onClick={() => {
-                setActiveIndex(index);
-              }}
-            >
-              {room.roomName}
-            </div>
-          ))}
-        </div>
-        <div
-          style={{
-            fontSize: '38px',
-            visibility: activeIndex === state.value.rooms.length - 1 ? 'hidden' : 'visible',
-          }}
-          className={stylesMobile.arrowPagination}
-          onClick={handleNext}
-        >
-          &raquo;
-        </div>
-      </div>
+      <RoomCarousel
+        rooms={state.value?.rooms || []}
+        activeIndex={activeIndex}
+        onItemClick={setActiveIndex}
+        onPrev={handlePrev}
+        onNext={handleNext}
+      />
       <div id="drivers-list" className={stylesMobile.driversList} ref={refTest}>
         {currentItems.map(item => {
           if (item?.type === 'group') {
@@ -173,31 +146,34 @@ export function HomePageMobile() {
       </div>
       {/*ПАГИНАЦИЯ*/}
       <div className={stylesMobile.paginationBar}>
-        <div className={stylesMobile.navigation}>
-          <div
-            style={{
-              marginRight: '5px',
-              visibility: page === 1 ? 'hidden' : 'visible',
-              fontSize: '38px',
-            }}
-            className={stylesMobile.arrowPagination}
-            onClick={() => setPage(p => Math.max(p - 1, 1))}
-          >
-            &laquo;
-          </div>
-          <div className={stylesMobile.totalCount}>{countElementForPages}</div>
-          <div
-            style={{
-              marginLeft: '5px',
-              visibility: page === countPages ? 'hidden' : 'visible',
-              fontSize: '38px',
-            }}
-            className={stylesMobile.arrowPagination}
-            onClick={() => setPage(p => Math.min(p + 1, countPages))}
-          >
-            &raquo;
-          </div>
+        <div
+          style={{
+            marginRight: '5px',
+            visibility: page === 1 ? 'hidden' : 'visible',
+            fontSize: '38px',
+            left: '0',
+            top: '0',
+          }}
+          className={stylesMobile.arrowPagination}
+          onClick={() => setPage(p => Math.max(p - 1, 1))}
+        >
+          &laquo;
         </div>
+        <div
+          style={{
+            marginLeft: '5px',
+            visibility: page === countPages ? 'hidden' : 'visible',
+            fontSize: '38px',
+            right: '0',
+            top: '0',
+          }}
+          className={stylesMobile.arrowPagination}
+          onClick={() => setPage(p => Math.min(p + 1, countPages))}
+        >
+          &raquo;
+        </div>
+
+        <div className={stylesMobile.totalCount}>{countElementForPages}</div>
         <div className={stylesMobile.dotsWrapper}>
           {countPages > 0 && (
             <div className={stylesMobile.dots}>
@@ -212,6 +188,7 @@ export function HomePageMobile() {
           )}
         </div>
       </div>
+
       <Modal open={isAddRoomModal} onClose={() => setIsAddRoomModal(false)} maxWidth="md">
         <div className={stylesMobile.modalContainer}>
           <button className={stylesMobile.closeBtn} onClick={() => setIsAddRoomModal(false)}>

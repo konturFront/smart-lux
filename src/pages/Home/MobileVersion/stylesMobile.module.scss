@@ -54,7 +54,22 @@
   flex-wrap: wrap;
 }
 
+.paginationBar {
+  position: relative;
+  border-top: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  background-color: #2e2e2e;
+  color: white;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+}
+
 .arrowPagination {
+  position: absolute;
   display: flex;
   color: white;
   font-size: 30px;
@@ -65,50 +80,6 @@
     opacity: 0.4;
     cursor: default;
   }
-}
-
-.btn {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  min-width: 200px;
-  max-width: 300px;
-  transition: all 0.1s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.btn:hover {
-  background-color: #444;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-}
-
-.btn:active {
-  background-color: #222;
-  transform: scale(0.98);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.paginationBar {
-  border-top: 1px solid white;
-  display: flex;
-  flex-direction: column;
-  background-color: #2e2e2e;
-  color: white;
-  font-size: 20px;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-}
-
-.navigation {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .arrow {
@@ -126,21 +97,6 @@
   }
 }
 
-.totalCount {
-  display: flex;
-  font-weight: bold;
-  font-size: 24px;
-  text-align: center;
-}
-
-.centerBlock {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-}
 
 .dotsWrapper {
   max-width: 100%;
@@ -173,6 +129,49 @@
   }
 }
 
+.btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  min-width: 200px;
+  max-width: 300px;
+  transition: all 0.1s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn:hover {
+  background-color: #444;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.btn:active {
+  background-color: #222;
+  transform: scale(0.98);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+.totalCount {
+  display: flex;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+}
+
+.centerBlock {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+
 
 /* Отступы обёртки страницы */
 .rooms {
@@ -189,50 +188,6 @@
   flex-wrap: nowrap;
 }
 
-/* Обёртка всей карусели: стрелки + список */
-.roomCarouselWrapper {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  color: white;
-  overflow: hidden; /* чтобы не показывать возможный скролл */
-}
-
-/* Контейнер со списком комнат */
-.roomCarousel {
-  display: flex;
-  overflow-x: auto; /* разрешаем скролл, но скрываем его */
-  scroll-behavior: smooth; /* плавная прокрутка */
-  -ms-overflow-style: none;  /* скрываем скролл в IE */
-  scrollbar-width: none;     /* скрываем скролл в Firefox */
-
-}
-
-
-.roomCarousel::-webkit-scrollbar {
-  display: none; /* скрываем скролл в Chrome */
-}
-
-/* Одна комната */
-.roomItem {
-  cursor: pointer;
-  min-width: 100px;
-  text-align: center;
-  padding: 8px 16px;
-  white-space: nowrap;
-  opacity: 0.4;
-  font-size: 18px;
-  //transition: all 0.3s;
-  flex-shrink: 0;
-
-  &.active {
-    color: #ffffff;
-    //transform: scale(1.3);
-    opacity: 1;
-  }
-}
 /* Кнопки стрелок */
 .arrow {
   font-size: 24px;

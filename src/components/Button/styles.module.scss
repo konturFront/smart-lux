@@ -1,0 +1,83 @@
+.btn {
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  border: none;
+  padding: 10px 14px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  min-width: 150px;
+  max-width: 300px;
+  transition: all 0.1s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+
+  // Для устройств с hover (десктопы)
+  @media (hover: hover) {
+    &:hover {
+      background-color: #444;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // Для тач-устройств
+  &:active {
+    background-color: #444;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    transform: scale(0.98);
+  }
+}
+
+.wrapperBtn {
+  display: flex;
+  width: 100%;
+  padding: 0 20px;
+  gap: 20px;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+// Размеры
+.btn--small {
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.btn--medium {
+  padding: 10px 16px;
+  font-size: 16px;
+}
+
+.btn--large {
+  padding: 14px 20px;
+  font-size: 18px;
+}
+
+// Полная ширина
+.btn--full-width {
+  width: 100%;
+}
+
+// Иконка
+.btn__icon {
+  display: flex;
+  align-items: center;
+}
+
+
+@media (max-width: 460px) {
+  .wrapperBtn {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    //justify-content: center;
+  }
+  //.btn {
+  //  //width: 100%;
+  //  min-width: 0;
+  //  flex: 1 1 45%;
+  //  max-width: 1000px;
+  //}
+}

@@ -1,6 +1,7 @@
 import styles from './styles.module.scss';
 import { useCallback, useState } from 'preact/hooks';
 import { reconnectWS, sendMessageSocket, state } from '../../store/store';
+import { Button } from '../../components/Button/Button';
 
 export const SettingsPage = () => {
   const [mode, setMode] = useState<'host' | 'ap'>('host');
@@ -40,10 +41,10 @@ export const SettingsPage = () => {
   return (
     <div className={styles.settings}>
       <div className={styles.settingsPanel}>
-        <button className={styles.btn} onClick={resetMaster}>
-          Перезагрузка Мастера
-        </button>
-        <h2>Настройки Wi-Fi</h2>
+        <div className={styles.wrapperBtn}>
+          <Button text=" Перезагрузка Мастера" onClick={resetMaster} />
+        </div>
+        <h2 style={{ textAlign: 'center' }}>Настройки Wi-Fi</h2>
         <div className={styles.panel}>
           <label>
             Режим подключения:
@@ -79,9 +80,9 @@ export const SettingsPage = () => {
               onInput={e => setPassword((e.target as HTMLInputElement).value)}
             />
           </label>
-          <button className={styles.btn} onClick={saveSettingsWifi}>
-            Сохранить настройки Wi-Fi
-          </button>
+          <div className={styles.wrapperBtn}>
+            <Button text="Сохранить настройки Wi-Fi" onClick={saveSettingsWifi} />
+          </div>
           <label style={{ marginTop: '20px' }}>
             URL WebSocket-сервера:
             <div className={styles.wsUrlWrapper}>
@@ -92,18 +93,17 @@ export const SettingsPage = () => {
                   setReUrl((e.target as HTMLInputElement).value);
                 }}
               />
-              <button className={styles.btn} onClick={reConnectWS}>
-                Переподключить сокет
-              </button>
+              <div className={styles.wrapperBtn}>
+                <Button text=" Переподключить сокет" onClick={reConnectWS} />
+              </div>
             </div>
           </label>
         </div>
 
-        <h2>Сканирование сетей Wi-Fi</h2>
-        <button className={styles.btn} onClick={scanWifiNet}>
-          Сканировать сети
-        </button>
-
+        <h2 style={{ textAlign: 'center' }}>Сканирование сетей Wi-Fi</h2>
+        <div className={styles.wrapperBtn}>
+          <Button text="    Сканировать сети" onClick={scanWifiNet} />
+        </div>
         <div className={styles.wifiNetworks}>
           {state.value.wifiNetworks.map(item => (
             <div className={styles.wifiTag} onClick={() => setSsid(item)}>

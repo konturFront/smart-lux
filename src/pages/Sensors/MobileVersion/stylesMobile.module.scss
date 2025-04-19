@@ -70,7 +70,24 @@
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+.totalCount {
+  display: flex;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+}
+
+.centerBlock {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
 .paginationBar {
+  position: relative;
   border-top: 1px solid white;
   display: flex;
   flex-direction: column;
@@ -80,13 +97,21 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 70px;
 }
 
-.navigation {
+.arrowPagination {
+  position: absolute;
   display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 4px 12px;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
 }
 
 .arrow {
@@ -102,22 +127,6 @@
     opacity: 0.4;
     cursor: default;
   }
-}
-
-.totalCount {
-  display: flex;
-  font-weight: bold;
-  font-size: 24px;
-  text-align: center;
-}
-
-.centerBlock {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
 }
 
 .dotsWrapper {

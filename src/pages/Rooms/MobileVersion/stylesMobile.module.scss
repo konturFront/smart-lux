@@ -252,22 +252,31 @@
 
 /* Обёртка всей карусели: стрелки + список */
 .roomCarouselWrapper {
+  margin: 20px 0;
+  overflow-y: hidden;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 10px 0; /* Уменьшил вертикальные отступы */
   color: white;
-  overflow: hidden; /* чтобы не показывать возможный скролл */
+  height: 50px; /* Фиксированная высота */
+  min-height: 50px; /* Минимальная высота */
+  @media (max-width: 400px) {
+    margin: 10px 0;
+  }
 }
 
 /* Контейнер со списком комнат */
 .roomCarousel {
   display: flex;
-  overflow-x: auto; /* разрешаем скролл, но скрываем его */
-  scroll-behavior: smooth; /* плавная прокрутка */
-  -ms-overflow-style: none; /* скрываем скролл в IE */
-  scrollbar-width: none; /* скрываем скролл в Firefox */
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  height: 100%; /* Занимает всю высоту родителя */
+  align-items: center; /* Центрируем по вертикали */
 }
 
 .roomCarousel::-webkit-scrollbar {
@@ -279,16 +288,15 @@
   cursor: pointer;
   min-width: 100px;
   text-align: center;
-  padding: 8px 16px;
+  padding: 6px 16px; /* Уменьшил вертикальный padding */
   white-space: nowrap;
   opacity: 0.4;
-  font-size: 18px;
-  //transition: all 0.3s;
+  font-size: 20px;  /* Уменьшил размер шрифта */
   flex-shrink: 0;
+  line-height: 1.2; /* Оптимальный межстрочный интервал */
 
   &.active {
     color: #ffffff;
-    //transform: scale(1.3);
     opacity: 1;
   }
 }
@@ -317,6 +325,7 @@
 }
 
 .arrowPagination {
+  position: absolute;
   display: flex;
   color: white;
   font-size: 30px;
@@ -328,8 +337,8 @@
     cursor: default;
   }
 }
-
 .paginationBar {
+  position: relative;
   border-top: 1px solid white;
   display: flex;
   flex-direction: column;
@@ -339,6 +348,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: 70px;
 }
 
 .navigation {
