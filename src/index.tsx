@@ -10,7 +10,6 @@ import { DevicesPage } from './pages/Devices/DevicesPage';
 import { RoomsPage } from './pages/Rooms/RoomsPage';
 import { SensorsPage } from './pages/Sensors/SensorsPage';
 import { Home } from './pages/Home/Home';
-import { LongPressButton } from './pages/TestPage/TestPage';
 
 export function App() {
   return (
@@ -22,10 +21,8 @@ export function App() {
           <Route path="/service/devices" component={DevicesPage} />
           <Route path="/service/devices/:id" component={DeviceCardPage} />
           <Route path="/service/rooms" component={RoomsPage} />
-          {/*<Route path="/service/rooms/:id" component={GroupsPage} />*/}
           <Route path="/service/sensors" component={SensorsPage} />
           <Route path="/settings" component={SettingsPage} />
-          <Route path="/test" component={LongPressButton} />
           <Route default component={_404} />
         </Router>
       </Layout>

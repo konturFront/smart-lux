@@ -41,7 +41,7 @@ export class SocketService__Mock {
       if (data.driver === 'update') {
         const types = [2, 4, 6, 7, 96, 98, 128];
         const drivers = Object.fromEntries(
-          Array.from({ length: 64 }, (_, i) => [
+          Array.from({ length: 13 }, (_, i) => [
             `d${i}`,
             [i, types[Math.floor(Math.random() * types.length)]],
           ])
