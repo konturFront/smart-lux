@@ -32,7 +32,7 @@ export function Header() {
               };
             }}
           >
-            <div className={styles.burgerBtnItem} />
+            {/*<div className={styles.burgerBtnItem} />*/}
             <div className={styles.burgerBtnItem} />
             <div className={styles.burgerBtnItem} />
           </div>
