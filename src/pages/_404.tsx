@@ -6,7 +6,7 @@ export const _404 = () => {
   useEffect(() => {
     setTimeout(() => {
       route.route('/');
-    }, 3000);
+    }, 0);
   }, [route]);
   return null;
 };
