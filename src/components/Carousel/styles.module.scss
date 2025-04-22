@@ -1,7 +1,7 @@
 
 /* Обёртка всей карусели: стрелки + список */
 .roomCarouselWrapper {
-  margin: 20px 0;
+  //margin: 20px 0;
   overflow-y: hidden;
   width: 100%;
   display: flex;
@@ -32,23 +32,6 @@
   display: none; /* скрываем скролл в Chrome */
 }
 
-/* Одна комната */
-.roomItem {
-  cursor: pointer;
-  min-width: 100px;
-  text-align: center;
-  padding: 6px 16px; /* Уменьшил вертикальный padding */
-  white-space: nowrap;
-  opacity: 0.4;
-  font-size: 20px;  /* Уменьшил размер шрифта */
-  flex-shrink: 0;
-  line-height: 1.2; /* Оптимальный межстрочный интервал */
-
-  &.active {
-    color: #ffffff;
-    opacity: 1;
-  }
-}
 
 /* Одна комната */
 .roomItem {
@@ -57,23 +40,22 @@
   text-align: center;
   padding: 6px 16px; /* Уменьшил вертикальный padding */
   white-space: nowrap;
-  opacity: 0.4;
+  //opacity: 0.4;
   font-size: 20px;  /* Уменьшил размер шрифта */
   flex-shrink: 0;
   line-height: 1.2; /* Оптимальный межстрочный интервал */
 
   &.active {
-    color: #ffffff;
+    color: #4080b1;
+    transform: scale(1.2);
     opacity: 1;
   }
 }
 
 .arrowPagination {
   display: flex;
-  color: white;
   font-size: 24px; /* Уменьшил размер */
   cursor: pointer;
-  padding: 0 12px;
   height: 100%;
   align-items: center;
   align-self: center;

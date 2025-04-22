@@ -1,6 +1,9 @@
 import { signal } from '@preact/signals';
 import { socketService } from '../service/ws/socketService';
 import { GLOBAL_WS_URL } from '../global/value';
+import is from '@sindresorhus/is';
+import nan = is.nan;
+import { nanoid } from 'nanoid';
 
 export enum socketStatusEnum {
   PENDING = 'pending',
@@ -15,7 +18,7 @@ export type Room = {
   groups?: {
     idGroup: string;
     groupName: string;
-    driverAddresses: Record<string, number[]>;
+    driverAddresses?: Record<string, number[]>;
   }[];
 };
 export type RoomsArr = Room[];
@@ -58,6 +61,82 @@ export const reconnectWS = (url: string) => {
 export const showLoadingStateUI = () => {
   stateUI.value = { ...stateUI.value, isLoadingUI: true };
 };
+
+// Метод для добавления комнаты
+export const addRoom = (obj?: Room) => {
+  console.log('store');
+  state.value = {
+    ...state.value,
+    rooms: [...state.value.rooms, { ...obj }],
+  };
+};
+
+// Метод для удаление комнаты
+export const deleteRoom = (idRoom: string) => {
+  console.log('store');
+  state.value = {
+    ...state.value,
+    rooms: [...state.value.rooms.filter(item => item.idRoom !== idRoom)],
+  };
+};
+
+// Метод для добавление группы в текущую комнату
+export const addGroupItem = (idRoom: string, groupName: string) => {
+  const objGroup = {
+    idGroup: nanoid(),
+    groupName: groupName,
+    driverAddresses: {},
+  };
+
+  state.value = {
+    ...state.value,
+    rooms: state.value.rooms.map(room =>
+      room.idRoom === idRoom
+        ? {
+            ...room,
+            groups: [...(room.groups || []), objGroup],
+          }
+        : room
+    ),
+  };
+};
+
+// Метод для редактирования группы в текущую комнату
+export const editGroupName = (idRoom: string, idGroup: string, newGroupName: string) => {
+  state.value = {
+    ...state.value,
+    rooms: state.value.rooms.map(room => {
+      if (room.idRoom !== idRoom) return room;
+
+      return {
+        ...room,
+        groups: (room.groups || []).map(group => {
+          if (group.idGroup !== idGroup) return group;
+
+          return {
+            ...group,
+            groupName: newGroupName,
+          };
+        }),
+      };
+    }),
+  };
+};
+// Метод для удаление группы в текущую комнату
+export const deleteGroup = (idRoom: string, idGroup: string) => {
+  state.value = {
+    ...state.value,
+    rooms: state.value.rooms.map(room => {
+      if (room.idRoom !== idRoom) return room;
+
+      return {
+        ...room,
+        groups: (room.groups || []).filter(group => group.idGroup !== idGroup),
+      };
+    }),
+  };
+};
+
 // Метод для скрытия лоадинг в шапке
 export const hiddenLoadingStateUI = () => {
   stateUI.value = { ...stateUI.value, isLoadingUI: false };

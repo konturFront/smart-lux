@@ -13,7 +13,7 @@ export const useCalculateItemsPerPage = (
     const calculateItems = () => {
       if (containerRef?.current) {
         const totalHeight = containerRef?.current.getBoundingClientRect().height;
-        const visibleItems = Math.round((totalHeight - paddingTop + gap) / (itemHeight + gap));
+        const visibleItems = Math.floor((totalHeight - paddingTop + gap) / (itemHeight + gap));
         setItemsPerPage(Math.max(1, visibleItems));
       }
     };

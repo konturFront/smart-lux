@@ -6,6 +6,8 @@ import stylesMobile from './stylesMobile.module.scss';
 import { Modal } from '../../../components/Modal/Modal';
 import { useCalculateItemsPerPage } from '../../../hooks/useCalculateItemsPerPage';
 import { RoomCarousel } from '../../../components/Carousel/Carousel';
+import { ArrowIcon } from '../../../components/ArrowAction/ArrowAction';
+import { h } from 'preact';
 
 export function HomePageMobile() {
   const refTest = useRef<HTMLDivElement>(null);
@@ -113,6 +115,7 @@ export function HomePageMobile() {
         onItemClick={setActiveIndex}
         onPrev={handlePrev}
         onNext={handleNext}
+        sx={{ margin: '20px 0' }}
       />
       <div id="drivers-list" className={stylesMobile.driversList} ref={refTest}>
         {currentItems.map(item => {
@@ -152,12 +155,12 @@ export function HomePageMobile() {
             visibility: page === 1 ? 'hidden' : 'visible',
             fontSize: '38px',
             left: '0',
-            top: '0',
+            // top: '0',
           }}
           className={stylesMobile.arrowPagination}
           onClick={() => setPage(p => Math.max(p - 1, 1))}
         >
-          &laquo;
+          <ArrowIcon direction={'right'} />
         </div>
         <div
           style={{
@@ -165,12 +168,12 @@ export function HomePageMobile() {
             visibility: page === countPages ? 'hidden' : 'visible',
             fontSize: '38px',
             right: '0',
-            top: '0',
+            // top: '0',
           }}
           className={stylesMobile.arrowPagination}
           onClick={() => setPage(p => Math.min(p + 1, countPages))}
         >
-          &raquo;
+          <ArrowIcon direction={'left'} />
         </div>
 
         <div className={stylesMobile.totalCount}>{countElementForPages}</div>

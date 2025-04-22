@@ -11,23 +11,7 @@ type ButtonProps = {
   fullWidth?: boolean;
 };
 
-export const Button = ({
-  text = 'Кнопка',
-  className = '',
-  id,
-  disabled = false,
-  onClick,
-  size = 'medium',
-  fullWidth = false,
-}: ButtonProps) => {
-  // Формируем классы вручную
-  // let buttonClasses = styles.btn;
-  // buttonClasses += ` ${styles[`btn--${size}`]}`;
-  //
-  // if (fullWidth) buttonClasses += ` ${styles['btn--full-width']}`;
-  // if (disabled) buttonClasses += ` ${styles['btn--disabled']}`;
-  // if (className) buttonClasses += ` ${className}`;
-
+export const Button = ({ text = 'Кнопка', onClick }: ButtonProps) => {
   return (
     <div
       className={styles.btn}

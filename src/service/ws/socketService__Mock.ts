@@ -1,4 +1,4 @@
-// mockSocketService.ts
+import { nanoid } from 'nanoid';
 
 interface MockSocketOptions {
   onLoadingEnd?: () => void; // Коллбэк для завершения загрузки
@@ -78,16 +78,51 @@ export class SocketService__Mock {
           cmd: 'download',
           roomsArr: [
             {
-              idRoom: 'koridor1',
+              idRoom: nanoid(),
               roomName: 'Коридор',
               drivers: { d0: [0, 1], d1: [1, 4] },
+              groups: [
+                {
+                  idGroup: nanoid(),
+                  groupName: 'Центральный свет',
+                  driverAddresses: { d0: [18, 7], d1: [19, 4], d2: [20, 4] },
+                },
+                {
+                  idGroup: nanoid(),
+                  groupName: 'Гараж',
+                  driverAddresses: { d3: [21, 6], d4: [22, 4], d5: [23, 8] },
+                },
+                {
+                  idGroup: nanoid(),
+                  groupName: 'Подсветка по периметру',
+                  driverAddresses: { d3: [21, 6], d4: [22, 4], d5: [23, 8] },
+                },
+                {
+                  idGroup: nanoid(),
+                  groupName: 'Подсобное помещение',
+                  driverAddresses: { d3: [31, 6], d4: [42, 4], d5: [53, 8] },
+                },
+              ],
             },
-            { idRoom: 'koridor3', roomName: 'Спальня', drivers: { d0: [4, 7], d1: [5, 4] } },
-            { idRoom: 'koridor5', roomName: 'Прихожая', drivers: { d0: [8, 98], d1: [9, 4] } },
-            { idRoom: 'koridor9', roomName: 'Кладовая', drivers: { d0: [14, 7], d1: [15, 4] } },
-            { idRoom: 'koridor10', roomName: 'Подьезд', drivers: { d0: [16, 7], d1: [17, 4] } },
             {
-              idRoom: 'koridor11',
+              idRoom: nanoid(),
+              roomName: 'Спальня',
+              drivers: { d0: [4, 7], d1: [5, 4] },
+              groups: [
+                {
+                  idGroup: nanoid(),
+                  groupName: 'Все включено',
+                  driverAddresses: { d0: [18, 7], d1: [19, 4], d2: [20, 4] },
+                },
+                {
+                  idGroup: nanoid(),
+                  groupName: 'Ночной режим',
+                  driverAddresses: { d3: [31, 6], d4: [42, 4], d5: [53, 8] },
+                },
+              ],
+            },
+            {
+              idRoom: nanoid(),
               roomName: 'Гостинная',
               drivers: {
                 d6: [24, 4],
@@ -96,34 +131,39 @@ export class SocketService__Mock {
               },
               groups: [
                 {
-                  idGroup: 'gLivingMain',
+                  idGroup: nanoid(),
                   groupName: 'Центральный свет',
                   driverAddresses: { d0: [18, 7], d1: [19, 4], d2: [20, 4] },
                 },
                 {
-                  idGroup: 'gLivingWall1',
+                  idGroup: nanoid(),
                   groupName: 'Уход',
                   driverAddresses: { d3: [21, 6], d4: [22, 4], d5: [23, 8] },
                 },
                 {
-                  idGroup: 'gLivingWall2',
+                  idGroup: nanoid(),
                   groupName: 'Встреча гостей',
                   driverAddresses: { d3: [21, 6], d4: [22, 4], d5: [23, 8] },
                 },
                 {
-                  idGroup: 'gLivingWall3',
+                  idGroup: nanoid(),
                   groupName: 'Романтика',
                   driverAddresses: { d3: [21, 6], d4: [22, 4], d5: [23, 8] },
                 },
                 {
-                  idGroup: 'gLivingWall4',
+                  idGroup: nanoid(),
                   groupName: 'Свет везде',
                   driverAddresses: { d3: [21, 6], d4: [22, 4], d5: [23, 8] },
                 },
                 {
-                  idGroup: 'gLivingWall5',
+                  idGroup: nanoid(),
                   groupName: 'Подсветка по периметру',
                   driverAddresses: { d3: [21, 6], d4: [22, 4], d5: [23, 8] },
+                },
+                {
+                  idGroup: nanoid(),
+                  groupName: 'Обеденный свет',
+                  driverAddresses: { d3: [31, 6], d4: [42, 4], d5: [53, 8] },
                 },
               ],
             },

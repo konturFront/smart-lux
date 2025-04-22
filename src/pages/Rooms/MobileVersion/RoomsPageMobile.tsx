@@ -1,5 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'preact/hooks';
-import { sendMessageSocket, state } from '../../../store/store';
+import {
+  addGroupItem,
+  addRoom,
+  deleteGroup,
+  deleteRoom,
+  editGroupName,
+  sendMessageSocket,
+  state,
+} from '../../../store/store';
 import { useLocation } from 'preact-iso';
 import styles from './stylesMobile.module.scss';
 import { Modal } from '../../../components/Modal/Modal';
@@ -7,7 +15,10 @@ import { useCalculateItemsPerPage } from '../../../hooks/useCalculateItemsPerPag
 import { GroupPreview } from '../../../components/GroupPreview/GroupPreview';
 import { Button } from '../../../components/Button/Button';
 import { RoomCarousel } from '../../../components/Carousel/Carousel';
+import { nanoid } from 'nanoid';
 import stylesMobile from '../../Home/MobileVersion/stylesMobile.module.scss';
+import { ArrowIcon } from '../../../components/ArrowAction/ArrowAction';
+import { h } from 'preact';
 
 export const RoomsPageMobile = () => {
   const refTest = useRef<HTMLDivElement>(null);
@@ -27,6 +38,59 @@ export const RoomsPageMobile = () => {
   const [renameValue, setRenameValue] = useState('');
 
   const { itemsPerPage } = useCalculateItemsPerPage(refTest);
+  const isOpenModal = isAddGroupModal || isDeleteRoomModal || isAddRoomModal || !!isEditGroupModal;
+  const _dualPrimaryButtonText = isDeleteRoomModal
+    ? 'Удалить'
+    : isAddGroupModal || isAddRoomModal
+      ? 'Cоздать'
+      : !!isEditGroupModal
+        ? 'Редактировать'
+        : 'Удалить';
+  const _dualSecondaryButtonText =
+    isDeleteRoomModal || isAddRoomModal || isAddGroupModal
+      ? 'Отмена'
+      : !!isEditGroupModal
+        ? 'Удалить'
+        : 'Error';
+
+  const _dualPrimaryButtonAction = () => {
+    if (isAddRoomModal && renameValue?.length > 0) {
+      createRoom(renameValue);
+    }
+    if (isDeleteRoomModal) {
+      deleteRoom(selectRoom?.idRoom);
+      setActiveIndex(0);
+    }
+    if (isAddGroupModal && renameValue?.length > 0) {
+      const idRoom = selectRoom.idRoom;
+      addGroupItem(idRoom, renameValue);
+    }
+
+    if (isEditGroupModal && renameValue?.length > 0) {
+      const idRoom = selectRoom?.idRoom;
+      const idGroup = isEditGroupModal?.idGroup;
+      editGroupName(idRoom, idGroup, renameValue);
+    }
+    onCloseModal();
+  };
+
+  const _dualSecondaryButtonAction = () => {
+    const idRoom = selectRoom?.idRoom;
+    const idGroup = isEditGroupModal?.idGroup;
+    if (isEditGroupModal) {
+      deleteGroup(idRoom, idGroup);
+    }
+    onCloseModal();
+  };
+
+  const onCloseModal = () => {
+    setRenameValue(undefined);
+    setIsDeleteRoomModal(false);
+    setIsAddGroupModal(false);
+    setIsAddRoomModal(false);
+    setIsEditGroupModal(undefined);
+    setRenameValue(undefined);
+  };
 
   useEffect(() => {
     sendMessageSocket({ rooms: 'search', cmd: 'start' }, false);
@@ -38,15 +102,17 @@ export const RoomsPageMobile = () => {
 
   useEffect(() => {
     // 1) Если нет драйверов вообще, сбрасываем всё
+
     if (!groupsSelectRoom) {
       setCurrentItems([]);
       setCountPages(1);
+      setCountElementForPages(0);
       return;
     }
 
     const allItems = [...groupsSelectRoom];
     setCountElementForPages(allItems?.length ?? 0);
-
+    console.log('пересчет');
     // 6) Пагинация
     if (allItems.length > 0) {
       const totalPages = Math.ceil(allItems.length / itemsPerPage);
@@ -88,13 +154,23 @@ export const RoomsPageMobile = () => {
     setActiveIndex(prev => Math.min(prev + 1, state.value.rooms.length - 1));
   }, [state.value.rooms]);
 
+  const createRoom = useCallback((str?: string) => {
+    const obj = { idRoom: `${nanoid()}`, roomName: `${str}`, drivers: {} };
+    addRoom(obj);
+  }, []);
+
   return (
     <div className={styles.devices}>
-      <div className={styles.wrapperBtn}>
+      <div
+        className={styles.wrapperBtn}
+        style={{ padding: '0  0 20px 0', borderBottom: '1px solid #ddd' }}
+      >
         <Button
           text="Удалить"
           onClick={() => {
-            setIsDeleteRoomModal(true);
+            if (state.value?.rooms?.length > 0) {
+              setIsDeleteRoomModal(true);
+            }
           }}
         />
         <Button
@@ -110,6 +186,7 @@ export const RoomsPageMobile = () => {
         onItemClick={setActiveIndex}
         onPrev={handlePrev}
         onNext={handleNext}
+        sx={{ margin: '20px 0 10px 0' }}
       />
       <div
         className={styles.wrapperBtn}
@@ -150,12 +227,12 @@ export const RoomsPageMobile = () => {
             visibility: page === 1 ? 'hidden' : 'visible',
             fontSize: '38px',
             left: '0',
-            top: '0',
+            // top: '0',
           }}
           className={stylesMobile.arrowPagination}
           onClick={() => setPage(p => Math.max(p - 1, 1))}
         >
-          &laquo;
+          <ArrowIcon direction={'right'} />
         </div>
         <div
           style={{
@@ -163,14 +240,13 @@ export const RoomsPageMobile = () => {
             visibility: page === countPages ? 'hidden' : 'visible',
             fontSize: '38px',
             right: '0',
-            top: '0',
+            // top: '0',
           }}
           className={stylesMobile.arrowPagination}
           onClick={() => setPage(p => Math.min(p + 1, countPages))}
         >
-          &raquo;
+          <ArrowIcon direction={'left'} />
         </div>
-
         <div className={stylesMobile.totalCount}>{countElementForPages}</div>
         <div className={stylesMobile.dotsWrapper}>
           {countPages > 0 && (
@@ -189,25 +265,19 @@ export const RoomsPageMobile = () => {
 
       <Modal
         maxWidth="md"
-        open={isAddGroupModal || isDeleteRoomModal || isAddRoomModal || !!isEditGroupModal}
-        onClose={() => {
-          setRenameValue(undefined);
-          setIsDeleteRoomModal(false);
-          setIsAddGroupModal(false);
-          setIsAddRoomModal(false);
-          setIsEditGroupModal(undefined);
-          setRenameValue(undefined);
-        }}
+        open={isOpenModal}
+        onClose={onCloseModal}
         buttonsType="dual"
-        dualPrimaryButtonText={`${isDeleteRoomModal ? 'Удалить' : isAddGroupModal || isAddRoomModal ? 'Cоздать' : !!isEditGroupModal ? 'Редактировать' : 'Удалить'}`}
-        dualPrimaryButtonAction={() => {}}
-        dualSecondaryButtonText={`${isDeleteRoomModal || isAddRoomModal || isAddGroupModal ? 'Отмена' : !!isEditGroupModal ? 'Удалить' : 'Error'}`}
+        dualPrimaryButtonText={_dualPrimaryButtonText}
+        dualPrimaryButtonAction={_dualPrimaryButtonAction}
+        dualSecondaryButtonAction={_dualSecondaryButtonAction}
+        dualSecondaryButtonText={_dualSecondaryButtonText}
       >
         {isDeleteRoomModal && (
           <>
             <div
               className={styles.title}
-            >{`Вы точно хотите удалить помещение "${selectRoom.roomName}"`}</div>
+            >{`Вы точно хотите удалить помещение "${selectRoom?.roomName}"`}</div>
             <label className={styles.field}></label>
           </>
         )}
@@ -228,7 +298,9 @@ export const RoomsPageMobile = () => {
         )}
         {!!isAddGroupModal && (
           <>
-            <div className={styles.title}>{`Cоздать группу`}</div>
+            <div
+              className={styles.title}
+            >{`Cоздать группу в помещении "${selectRoom.roomName}"`}</div>
             <label className={styles.field}>
               <input
                 placeholder={'Название группы'}

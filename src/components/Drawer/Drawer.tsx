@@ -39,31 +39,25 @@ export const Drawer = () => {
           className={url === '/service/devices' ? styles.activeLink : ''}
           onClick={() => handlerChangeRoute('/service/devices')}
         >
-          {'Настройка драйверов'}
+          {'Драйверы'}
         </div>
         <div
           className={url === '/service/sensors' ? styles.activeLink : ''}
           onClick={() => handlerChangeRoute('/service/sensors')}
         >
-          {'Настройка сенсоров'}
+          {'Сенсоры'}
         </div>
         <div
           className={url === '/service/rooms' ? styles.activeLink : ''}
           onClick={() => handlerChangeRoute('/service/rooms')}
         >
-          {'Настройка групп и помещений'}
+          {'Помещения и группы'}
         </div>
         <div
           className={url === '/settings' ? styles.activeLink : ''}
           onClick={() => handlerChangeRoute('/settings')}
         >
-          {'Настройка Wi-Fi'}
-        </div>
-        <div
-          className={url === '/test' ? styles.activeLink : ''}
-          onClick={() => handlerChangeRoute('/test')}
-        >
-          {'TEST'}
+          {'Wi-Fi'}
         </div>
       </div>
     </div>

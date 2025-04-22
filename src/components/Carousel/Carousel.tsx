@@ -1,6 +1,7 @@
 import { h } from 'preact';
 import { useRef, useEffect } from 'preact/hooks';
 import styles from './styles.module.scss';
+import { ArrowIcon } from '../ArrowAction/ArrowAction';
 
 interface RoomCarouselProps {
   rooms: Array<{ idRoom: string; roomName: string }>;
@@ -8,6 +9,7 @@ interface RoomCarouselProps {
   onItemClick: (index: number) => void;
   onPrev: () => void;
   onNext: () => void;
+  sx?: React.CSSProperties;
 }
 
 export const RoomCarousel = ({
@@ -16,6 +18,7 @@ export const RoomCarousel = ({
   onItemClick,
   onPrev,
   onNext,
+  sx,
 }: RoomCarouselProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -35,39 +38,48 @@ export const RoomCarousel = ({
     scrollToActive();
   }, [activeIndex]);
 
+  console.log('');
   return (
-    <div className={styles.roomCarouselWrapper}>
-      <div
-        style={{
-          fontSize: '38px',
-          visibility: activeIndex === 0 - 1 ? 'hidden' : 'visible',
-        }}
-        className={styles.arrowPagination}
-        onClick={onPrev}
-      >
-        &laquo;
-      </div>
-      <div className={styles.roomCarousel} ref={containerRef}>
-        {rooms?.map((room, index) => (
-          <div
-            key={room.idRoom + index}
-            className={`${styles.roomItem} ${index === activeIndex ? styles.active : ''}`}
-            onClick={() => onItemClick(index)}
-          >
-            {room.roomName}
-          </div>
-        ))}
-      </div>
-      <div
-        style={{
-          fontSize: '38px',
-          visibility: activeIndex === rooms.length - 1 ? 'hidden' : 'visible',
-        }}
-        className={styles.arrowPagination}
-        onClick={onNext}
-      >
-        &raquo;
-      </div>
+    <div className={styles.roomCarouselWrapper} style={sx}>
+      {rooms?.length > 1 && (
+        <div
+          style={{
+            fontSize: '38px',
+            visibility: activeIndex === 0 ? 'hidden' : 'visible',
+          }}
+          className={styles.arrowPagination}
+          onClick={onPrev}
+        >
+          <ArrowIcon direction={'right'} />
+        </div>
+      )}
+      {rooms?.length > 0 ? (
+        <div className={styles.roomCarousel} ref={containerRef}>
+          {rooms?.map((room, index) => (
+            <div
+              key={room?.idRoom + index}
+              className={`${styles.roomItem} ${index === activeIndex ? styles.active : ''}`}
+              onClick={() => onItemClick(index)}
+            >
+              {room?.roomName}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>{'Нет созданных групп'}</div>
+      )}
+      {rooms?.length > 1 && (
+        <div
+          style={{
+            fontSize: '38px',
+            visibility: activeIndex === rooms?.length - 1 ? 'hidden' : 'visible',
+          }}
+          className={styles.arrowPagination}
+          onClick={onNext}
+        >
+          <ArrowIcon direction={'left'} />
+        </div>
+      )}
     </div>
   );
 };

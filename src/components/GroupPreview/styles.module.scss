@@ -3,7 +3,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  background-color: #2e2e2e;
+  background-color: #3a3a3a;
   border-radius: 4px;
   gap: 2px;
   font-family: sans-serif;
@@ -16,6 +16,7 @@
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
   -ms-user-select: none;       /* IE 10+ */
+  border-top: .1px solid #a8a8a8;
 
   @media (min-width: 990px) {
     width: calc(33.333% - 12px);

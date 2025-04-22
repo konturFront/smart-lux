@@ -4,6 +4,8 @@ import { useLocation } from 'preact-iso';
 import { DriverPreview } from '../../../components/DriverPreview/DriverPreview';
 import stylesMobile from './stylesMobile.module.scss';
 import { Button } from '../../../components/Button/Button';
+import { ArrowIcon } from '../../../components/ArrowAction/ArrowAction';
+import { h } from 'preact';
 
 export function DevicesPageMobile() {
   const refTest = useRef<HTMLDivElement>(null);
@@ -77,12 +79,12 @@ export function DevicesPageMobile() {
             visibility: page === 1 ? 'hidden' : 'visible',
             fontSize: '38px',
             left: '0',
-            top: '0',
+            // top: '0',
           }}
           className={stylesMobile.arrowPagination}
           onClick={() => setPage(p => Math.max(p - 1, 1))}
         >
-          &laquo;
+          <ArrowIcon direction={'right'} />
         </div>
         <div
           style={{
@@ -90,12 +92,12 @@ export function DevicesPageMobile() {
             visibility: page === countPages ? 'hidden' : 'visible',
             fontSize: '38px',
             right: '0',
-            top: '0',
+            // top: '0',
           }}
           className={stylesMobile.arrowPagination}
           onClick={() => setPage(p => Math.min(p + 1, countPages))}
         >
-          &raquo;
+          <ArrowIcon direction={'left'} />
         </div>
 
         <div className={stylesMobile.totalCount}>{totalDrivers}</div>
